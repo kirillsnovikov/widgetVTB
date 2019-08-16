@@ -1,0 +1,642 @@
+[
+    {
+        "ListOfVTB24 Auth Administration - Parameters": {},
+        "Comment Required Flg": "Y",
+        "Operation Name": "22.2.2.",
+        "Available w Service Prohibited": "Y",
+        "Parent Operation": "два 1",
+        "Hint Text": "",
+        "Check": "По кнопке ОК",
+        "Display Text": "двадвадва",
+        "ACC": "Y",
+        "Parent Operation Id": "1-IZEOAW",
+        "SMS Flg": "Y"
+    },
+    {
+        "ListOfVTB24 Auth Administration - Parameters": {
+            "VTB24 Auth Administration - Parameters": [
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "%-ная ставка по вкладу",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J3EWFU",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "ФИО",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J3EWFU",
+                    "Optional Flg": "N"
+                }
+            ]
+        },
+        "Comment Required Flg": "N",
+        "Operation Name": "Сэм",
+        "Available w Service Prohibited": "N",
+        "Parent Operation": "",
+        "Hint Text": "",
+        "Check": "По кнопкам Да/Нет",
+        "Display Text": "",
+        "ACC": "N",
+        "Parent Operation Id": "",
+        "SMS Flg": "N"
+    },
+    {
+        "ListOfVTB24 Auth Administration - Parameters": {
+            "VTB24 Auth Administration - Parameters": [
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "1 из 5 последних успешных операций",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "Sms-код",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "Адрес регистрации",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "Адрес фактического проживания",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "Вид на жительство",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "Военный билет/удостоверение офицера",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "Временное удостоверение личности",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "Дата открытия/пролонгации вклада",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "Дата рождения",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "Доверенный номер телефона",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "Доп. параметр 1",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "Доп. параметр 2",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "Заграничный паспорт",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "Название вклада",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "Размер кредитного лимита/овердрафта",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "Серия и номер паспорта",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "Срок действия карты",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "Сумма вклада",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                },
+                {
+                    "Trusted Number Flg": "Y",
+                    "Parameter Name": "ФИО",
+                    "Untrusted Number Flg": "Y",
+                    "Parent Operation Id": "1-J2I3X4",
+                    "Optional Flg": "N"
+                }
+            ]
+},
+"Comment Required Flg": "N",
+"Operation Name": "Три",
+"Available w Service Prohibited": "N",
+"Parent Operation": "",
+"Hint Text": "",
+"Check": "",
+"Display Text": "",
+"ACC": "N",
+"Parent Operation Id": "",
+"SMS Flg": "N"
+},
+{
+    "ListOfVTB24 Auth Administration - Parameters": {},
+    "Comment Required Flg": "N",
+    "Operation Name": "Четыре",
+    "Available w Service Prohibited": "N",
+    "Parent Operation": "раз 1",
+    "Hint Text": "",
+    "Check": "По кнопкам Да/Нет",
+    "Display Text": "",
+    "ACC": "N",
+    "Parent Operation Id": "1-IZEOAU",
+    "SMS Flg": "N"
+},
+{
+    "ListOfVTB24 Auth Administration - Parameters": {
+        "VTB24 Auth Administration - Parameters": [
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Адрес регистрации",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAV",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Вид на жительство",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAV",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Временное удостоверение личности",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAV",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Доверенный номер телефона",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAV",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Заграничный паспорт",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAV",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "ФИО",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAV",
+                "Optional Flg": "N"
+            }
+        ]
+    },
+    "Comment Required Flg": "Y",
+    "Operation Name": "два",
+    "Available w Service Prohibited": "N",
+    "Parent Operation": "",
+    "Hint Text": "двадва",
+    "Check": "По кнопке ОК",
+    "Display Text": "два",
+    "ACC": "Y",
+    "Parent Operation Id": "",
+    "SMS Flg": "N"
+},
+{
+    "ListOfVTB24 Auth Administration - Parameters": {
+        "VTB24 Auth Administration - Parameters": [
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "%-ная ставка по вкладу",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "1 из 5 последних успешных операций",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Sms-код",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Адрес регистрации",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Адрес фактического проживания",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Вид на жительство",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Военный билет/удостоверение офицера",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Временное удостоверение личности",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Дата открытия/пролонгации вклада",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Дата рождения",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Доверенный номер телефона",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Доп. параметр 1",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Доп. параметр 2",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Заграничный паспорт",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Название вклада",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Размер кредитного лимита/овердрафта",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Серия и номер паспорта",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Срок действия карты",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Сумма вклада",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "ФИО",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAW",
+                "Optional Flg": "N"
+            }
+        ]
+},
+"Comment Required Flg": "Y",
+"Operation Name": "два 1",
+"Available w Service Prohibited": "N",
+"Parent Operation": "два",
+"Hint Text": "два 1два 1",
+"Check": "По кнопкам Да/Нет",
+"Display Text": "два 1",
+"ACC": "N",
+"Parent Operation Id": "1-IZEOAV",
+"SMS Flg": "Y"
+},
+{
+    "ListOfVTB24 Auth Administration - Parameters": {
+        "VTB24 Auth Administration - Parameters": [
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "%-ная ставка по вкладу",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "1 из 5 последних успешных операций",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Sms-код",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Адрес регистрации",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Адрес фактического проживания",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Вид на жительство",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Военный билет/удостоверение офицера",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Временное удостоверение личности",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Дата открытия/пролонгации вклада",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Дата рождения",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Доверенный номер телефона",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Доп. параметр 1",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Доп. параметр 2",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Заграничный паспорт",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Название вклада",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Размер кредитного лимита/овердрафта",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Серия и номер паспорта",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Срок действия карты",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Сумма вклада",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "ФИО",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEFTA",
+                "Optional Flg": "N"
+            }
+        ]
+},
+"Comment Required Flg": "Y",
+"Operation Name": "раз",
+"Available w Service Prohibited": "Y",
+"Parent Operation": "",
+"Hint Text": "разраз",
+"Check": "Нет",
+"Display Text": "раз",
+"ACC": "Y",
+"Parent Operation Id": "",
+"SMS Flg": "Y"
+},
+{
+    "ListOfVTB24 Auth Administration - Parameters": {
+        "VTB24 Auth Administration - Parameters": [
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Адрес регистрации",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAU",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Адрес фактического проживания",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAU",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Вид на жительство",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAU",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Военный билет/удостоверение офицера",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAU",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Временное удостоверение личности",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAU",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "Дата открытия/пролонгации вклада",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAU",
+                "Optional Flg": "N"
+            },
+            {
+                "Trusted Number Flg": "Y",
+                "Parameter Name": "ФИО",
+                "Untrusted Number Flg": "Y",
+                "Parent Operation Id": "1-IZEOAU",
+                "Optional Flg": "N"
+            }
+        ]
+    },
+    "Comment Required Flg": "Y",
+    "Operation Name": "раз 1",
+    "Available w Service Prohibited": "N",
+    "Parent Operation": "раз",
+    "Hint Text": "раз 1раз 1",
+    "Check": "По кнопкам Да/Нет",
+    "Display Text": "раз 1",
+    "ACC": "N",
+    "Parent Operation Id": "1-IZEFTA",
+    "SMS Flg": "Y"
+}
+]
