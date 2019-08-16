@@ -1,7 +1,11 @@
 <template>
   <div>
-    <div v-if="currentOperationName !== ''" @click="setParent()">{{'<= ' + currentOperationName}}</div>
-    <div v-for="(operation, i) in childrenOperations" @click="setOperation(operation['Operation Name'])">{{operation['Operation Name']}}</div>
+    <div v-if="currentOperationName !== ''" @click="setParent()">
+      {{'<=\'back\' ' + currentOperationName}}
+    </div>
+    <div v-for="(operation, i) in operations" @click="setSelectOperationName(operation['Operation Name'])">
+      {{operation['Operation Name']}}
+    </div>
   </div>
 </template>
 
@@ -9,27 +13,25 @@
   export default {
     name: 'OperationLevel',
     props: {
-      childrenOperations: Array,
+      operations: Array,
       currentOperationName: String,
     },
     mounted() {
-      console.log(this.childrenOperations)
+      console.log(this.operations)
 
     },
     methods: {
       getOperations(parentOperation) {
-        // console.log(parentOperation)
-        // this.$emit('getChildrenOperations', parentOperation)
       },
-      setOperation(name) {
-        console.log(name)
+      setSelectOperationName(name) {
+        // this.$emit('setSelectOperationName')
         this.$parent.selectedOperationName = name
       },
       setParent() {
-        let result = this.$parent.operations.filter((operation) => {
+        let result = this.$parent.operationsData.filter((operation) => {
           return operation['Operation Name'] == this.currentOperationName
         })
-        this.setOperation(result[0]['Parent Operation'])
+        this.setSelectOperationName(result[0]['Parent Operation'])
       }
     }
   }

@@ -1,7 +1,14 @@
 <template>
   <div class="container" style="position: fixed;">
-    <div v-if="renderLevel === 'first'">
-      <OperationLevel :childrenOperations="getOperations(selectedOperationName)" :currentOperationName="selectedOperationName" />
+    <div class="header">
+      <div @click="isShow = !isShow">^^^Развернуть^^^</div>
+    </div>
+    <div class="main-container" v-if="isShow">
+
+      <OperationLevel
+      :operations="getCurrentOperations"
+      :currentOperationName="selectedOperationName"/>
+
     </div>
   </div>
 </template>
@@ -10,10 +17,6 @@
   import outputData from './data/output'
   import OperationLevel from './components/OperationLevel.vue'
 
-
-  // let div = document.createElement('div');
-  // div.id = "app";
-  // div.innerHTML = "<strong>Всем привет!</strong> Вы прочитали важное сообщение.";
   export default {
     name: 'app',
     components: {
@@ -21,38 +24,18 @@
     },
     data() {
       return {
-        renderLevel: 'first',
-        parentOperation: null,
-        operations: outputData,
-        selectedOperationName: ''
+        operationsData: outputData,
+        selectedOperationName: '',
+        isShow: false
       }
     },
     computed: {
-      // getParentName() {
-      //   let result = this.operations.filter((operation) => {
-      //     return operation['Parent Operation'] === this.selectedOperationName
-      //   })
-      //   console.log(result)
-      //   return result["Operation Name"]
-      // }
-    },
-    mounted() {
-      // console.log(outputData)
-    },
-    methods: {
-      getChildrenOperations() {
-        // console.log('getChildrenOperations')
-      },
-      getOperations(ParentOperationName) {
-        let result = this.operations.filter(function(operation) {
-          return operation['Parent Operation'] === ParentOperationName
+      getCurrentOperations() {
+        let result = this.operationsData.filter((operation) => {
+          return operation['Parent Operation'] === this.selectedOperationName
         })
         return result
-      },
-      // cloneSelectedName(){
-      //   return this.selectedOperationName
-      // }
-
+      }
     }
   }
 </script>
