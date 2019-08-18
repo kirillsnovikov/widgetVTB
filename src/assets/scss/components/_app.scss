@@ -1,0 +1,10 @@
+body {
+    background: #eeeeee;
+}
+
+.widget-container {
+    @extend %flex-column;
+    background: $white;
+    width: $widget-width;
+    max-height: $widget-height;
+}

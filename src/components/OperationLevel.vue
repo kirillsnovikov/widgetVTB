@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div v-if="currentOperationName !== ''" @click="setParent()">
+    <div class="btn" v-if="currentOperationName !== ''" @click="setOperationName(parentOperationName)">
       {{'<=\'back\' ' + currentOperationName}}
     </div>
-    <div v-for="(operation, i) in operations" @click="setSelectOperationName(operation['Operation Name'])">
+    <div v-for="(operation, i) in operations" @click="setOperationName(operation['Operation Name'])">
       {{operation['Operation Name']}}
     </div>
   </div>
@@ -15,24 +15,18 @@
     props: {
       operations: Array,
       currentOperationName: String,
-    },
-    mounted() {
-      console.log(this.operations)
-
+      parentOperationName: String,
     },
     methods: {
-      getOperations(parentOperation) {
-      },
-      setSelectOperationName(name) {
-        // this.$emit('setSelectOperationName')
-        this.$parent.selectedOperationName = name
-      },
-      setParent() {
-        let result = this.$parent.operationsData.filter((operation) => {
-          return operation['Operation Name'] == this.currentOperationName
-        })
-        this.setSelectOperationName(result[0]['Parent Operation'])
+      setOperationName(name) {
+        this.$emit('set-operation-name', name)
       }
     }
   }
 </script>
+
+<style lang="scss">
+.btn {
+  background: blue;
+}
+</style>

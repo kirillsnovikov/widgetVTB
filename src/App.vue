@@ -1,13 +1,15 @@
 <template>
-  <div class="container" style="position: fixed;">
+  <div class="widget-container" style="position: fixed;">
     <div class="header">
       <div @click="isShow = !isShow">^^^Развернуть^^^</div>
     </div>
-    <div class="main-container" v-if="isShow">
+    <div class="main-layout" v-if="isShow">
 
       <OperationLevel
       :operations="getCurrentOperations"
-      :currentOperationName="selectedOperationName"/>
+      :currentOperationName="selectedOperationName"
+      :parentOperationName="getParentOperationName"
+      v-on:set-operation-name="setOperationName"/>
 
     </div>
   </div>
@@ -26,16 +28,30 @@
       return {
         operationsData: outputData,
         selectedOperationName: '',
-        isShow: false
+        isShow: true
       }
     },
     computed: {
+      // поместить в один метод присваивание названия родительской и передачу текущих операций
       getCurrentOperations() {
         let result = this.operationsData.filter((operation) => {
           return operation['Parent Operation'] === this.selectedOperationName
         })
         return result
+      },
+      getParentOperationName() {
+        let parentOperation = this.operationsData.find(operation => {
+          return operation['Operation Name'] === this.selectedOperationName
+        })
+        if (parentOperation) {
+          return parentOperation['Parent Operation']
+        }
       }
-    }
+    },
+    methods: {
+      setOperationName(name) {
+        this.selectedOperationName = name
+      }
+    },
   }
 </script>
