@@ -1,0 +1,22 @@
+// *-enter-active = время анимации появления
+// *-leave-active = время анимации исчезновения
+
+
+// анимация появления кнопок операций
+.operation-button-enter-active {
+  transition: all .4s;
+  animation-delay: .5s;
+}
+.operation-button-leave-active {
+  transition: all .4s;
+  // delay: .4s;
+}
+.operation-button-enter, .operation-button-leave-to /* .widen-item-leave-active в версии ниже 2.1.8 */ {
+  transform: translateX(150px);
+  // opacity: 0;
+}
+// .operation-button-leave-to {
+//   transform: translateX(-50px);
+//   opacity: 0;
+// }
+// ==========================

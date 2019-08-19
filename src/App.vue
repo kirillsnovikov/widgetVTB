@@ -1,9 +1,12 @@
 <template>
-  <div class="widget-container" style="position: fixed;">
-    <div class="header">
-      <div @click="isShow = !isShow">^^^Развернуть^^^</div>
+  <div class="widget-container">
+    <div class="widget-header">
+
+      <Header
+      v-on:hide-widget-main="isShow = !isShow"/>
+
     </div>
-    <div class="main-layout" v-if="isShow">
+    <div class="widget-main" v-if="isShow">
 
       <OperationLevel
       :operations="getCurrentOperations"
@@ -17,11 +20,13 @@
 
 <script>
   import outputData from './data/output'
+  import Header from './components/Header.vue'
   import OperationLevel from './components/OperationLevel.vue'
 
   export default {
     name: 'app',
     components: {
+      Header,
       OperationLevel
     },
     data() {

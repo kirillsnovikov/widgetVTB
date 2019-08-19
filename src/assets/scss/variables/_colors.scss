@@ -1,6 +1,7 @@
 $white: #ffffff;
 $royal: #0a2896;
 $azure: #00a0df;
+$cerulean-blue: #3066BE;
 $black: #000000;
 $black-two: #1a1a1a;
 $blue-blue: #1851c7;
@@ -11,6 +12,22 @@ $yellow-orange: #f7b500;
 $light-peach: #fed6bb;
 $bright-orange: #fa6400;
 $tomato: #e02020;
+$apple-green: #7FB800;
 $pale-grey: #e8ecf3;
 $white-two: #d8d8d8;
 $cloudy-blue: #c0c5d2;
+
+
+$success-color: $apple-green;
+$danger-color: $tomato;
+
+// кнопки
+$btn-show-color: $azure;
+$btn-show-active-color: $cerulean-blue;
+$btn-border-color: $cloudy-blue;
+$btn-back-color: $azure;
+$btn-operation-color: $black;
+
+// scrollbar
+$scrollbar-color: $azure;
+

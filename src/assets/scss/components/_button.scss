@@ -1,0 +1,24 @@
+.btn {
+  width: 250px;
+  overflow: hidden;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.btn-main-operation {
+  border: 1px solid $white-two;
+}
+
+.btn-back {
+  padding: 15px 10px;
+  @include button-color($btn-back-color);
+}
+
+.btn-operation {
+  @include button-color($btn-operation-color);
+}

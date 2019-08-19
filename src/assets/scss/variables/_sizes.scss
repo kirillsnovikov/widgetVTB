@@ -1,3 +1,6 @@
 // основные размеры
 $widget-width: 285px;
-$widget-height: 400px;
+$widget-height: 460px;
+
+$header-height: 50px;
+$widget-main-height: $widget-height - $header-height - 30px;

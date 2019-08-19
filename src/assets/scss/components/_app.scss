@@ -1,10 +1,16 @@
-body {
-    background: #eeeeee;
-}
-
 .widget-container {
-    @extend %flex-column;
-    background: $white;
-    width: $widget-width;
-    max-height: $widget-height;
+  @extend %flex-column;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  font-family: Arial;
+  background: $white;
+  width: $widget-width;
+  overflow: hidden;
+  padding: 10px;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 15px rgba($black, 0.3);
+  & * {
+    box-sizing: border-box;
+  }
 }

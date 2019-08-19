@@ -1,0 +1,38 @@
+.widget-header {
+  height: $header-height;
+  overflow: hidden;
+  .header-layout {
+    @extend %flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__main {
+    @extend %flex-column;
+    &__title {
+      font-weight: bold;
+      font-size: 20px;
+    }
+    &__status {
+      font-size: 12px;
+      &__number {
+
+      }
+      &__operation {
+
+      }
+    }
+  }
+  &__button {
+    color: $white-two;
+    cursor: pointer;
+    font-size: 25px;
+    transition: all .3s;
+    transform: rotateX(0deg);
+    &:hover {
+      color: $btn-show-color;
+    }
+  }
+  .rotate {
+    transform: rotateX(180deg);
+  }
+}
