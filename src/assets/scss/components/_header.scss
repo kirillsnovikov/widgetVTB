@@ -2,9 +2,9 @@
   height: $header-height;
   overflow: hidden;
   .header-layout {
-    @extend %flex;
-    justify-content: space-between;
-    align-items: center;
+    @extend %flex-center-between;
+    // justify-content: space-between;
+    // align-items: center;
   }
   &__main {
     @extend %flex-column;

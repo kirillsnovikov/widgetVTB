@@ -11,14 +11,20 @@
 }
 
 .btn-main-operation {
+  @extend %flex-center-between;
   border: 1px solid $white-two;
 }
 
 .btn-back {
+  @extend %flex-row-center;
   padding: 15px 10px;
   @include button-color($btn-back-color);
+  span {
+    margin-left: 10px;
+  }
 }
 
 .btn-operation {
+  @extend %flex-center-between;
   @include button-color($btn-operation-color);
 }

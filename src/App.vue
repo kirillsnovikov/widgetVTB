@@ -3,23 +3,28 @@
     <div class="widget-header">
 
       <Header
-      v-on:hide-widget-main="isShow = !isShow"/>
+      v-on:hide-widget-main="isShow = !isShow"
+      :ClientName="operationsData.ClientName"/>
 
     </div>
-    <div class="widget-main" v-if="isShow">
+    <transition name="show-widget">
+      <div class="widget-main" v-if="isShow">
 
-      <OperationLevel
-      :operations="getCurrentOperations"
-      :currentOperationName="selectedOperationName"
-      :parentOperationName="getParentOperationName"
-      v-on:set-operation-name="setOperationName"/>
+        <OperationLevel
+        :operations="getCurrentOperations"
+        :currentOperationIndex="operationsData.SelectedOperationIndex"
+        :currentOperation="getCurrentOperation"
+        :parameters="getParameters"
+        :parentOperationIndex="getParentOperationIndex"
+        v-on:set-operation-index="setOperationIndex"/>
 
-    </div>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
-  import outputData from './data/output'
+  import outputData from './data/output_formated'
   import Header from './components/Header.vue'
   import OperationLevel from './components/OperationLevel.vue'
 
@@ -32,31 +37,49 @@
     data() {
       return {
         operationsData: outputData,
-        selectedOperationName: '',
         isShow: true
       }
     },
+    mounted() {
+    },
+    methods: {
+      setOperationIndex(index) {
+        this.operationsData.SelectedOperationIndex = index
+      }
+    },
     computed: {
-      // поместить в один метод присваивание названия родительской и передачу текущих операций
       getCurrentOperations() {
-        let result = this.operationsData.filter((operation) => {
-          return operation['Parent Operation'] === this.selectedOperationName
+        let result = this.operationsData.Operations.filter((operation) => {
+          return operation.ParentOperationIndex === this.operationsData.SelectedOperationIndex
         })
         return result
       },
-      getParentOperationName() {
-        let parentOperation = this.operationsData.find(operation => {
-          return operation['Operation Name'] === this.selectedOperationName
+      getCurrentOperation() {
+        let result
+        if (this.operationsData.SelectedOperationIndex !== null) {
+          result = this.operationsData.Operations[this.operationsData.SelectedOperationIndex]
+        } else {
+          result = {}
+        }
+        return result
+      },
+      getParentOperationIndex() {
+        let parentOperation = this.operationsData.Operations.find(operation => {
+          return operation.Index === this.operationsData.SelectedOperationIndex
         })
         if (parentOperation) {
-          return parentOperation['Parent Operation']
+          return parentOperation.ParentOperationIndex
+        } else {
+          return null
         }
-      }
-    },
-    methods: {
-      setOperationName(name) {
-        this.selectedOperationName = name
-      }
-    },
+      },
+      getParameters() {
+        if (Object.keys(this.getCurrentOperation).length !== 0) {
+          return this.getCurrentOperation.ParametersIndexes.map((parameterIndex) => {
+            return this.operationsData.Parameters[parameterIndex]
+          })
+        }
+      },
+    }
   }
 </script>

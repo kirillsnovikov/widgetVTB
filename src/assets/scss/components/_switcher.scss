@@ -1,3 +1,21 @@
+.switchers-layout {
+  @extend %flex-column;
+}
+
+.switcher {
+  @extend %flex-center-between;
+  position: relative;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  // padding: 0 5px;
+  // background: #eee;
+  .switcher-button input[type="radio"] {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+  }
+}
+
 .switcher-wrap {
   @extend %flex;
   background-color: $battleship-grey;
@@ -8,18 +26,11 @@
   color: $white;
   font-size: 20px;
   position: relative;
+  z-index: 2;
   // transition: all 4s;
-  .switcher-button {
+  .switcher-area {
     text-align: center;
     flex: 1;
-    // &:nth-child(1) {
-    //   padding-left: 10px;
-    //   text-align: right;
-    // }
-    // &:nth-child(3) {
-    //   padding-right: 10px;
-    //   text-align: right;
-    // }
   }
   .switcher-toggle {
     position: absolute;
@@ -35,10 +46,12 @@
 
 
 .success-switcher {
-  background: linear-gradient(45deg, #7dff5c, #076200);
+  background: $switcher-success-color;
+  // background: linear-gradient(45deg, #7dff5c, #076200);
 }
 .error-switcher {
-  background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(252,176,69,1) 100%);
+  background: $switcher-danger-color;
+  // background: linear-gradient(90deg, rgba(226,27,27,1) 0%, rgba(255,81,0,1) 100%);
 }
 .success-toggle {
   transform: translateX(20px);

@@ -1,7 +1,7 @@
 <template>
   <div class="header-layout">
     <div class="widget-header__main">
-      <div class="widget-header__main__title">Иванов Иван</div>
+      <div class="widget-header__main__title">{{ClientName}}</div>
       <div class="widget-header__main__status">
         <div class="widget-header__main__status__number success">
           <i class="icon-check"></i>
@@ -22,6 +22,12 @@
 <script>
   export default {
     name: 'Header',
+    props: {
+      ClientName: {
+        type: String,
+        default: 'Неизвестный абонент'
+      }
+    },
     data() {
       return {
         isRotate: false,

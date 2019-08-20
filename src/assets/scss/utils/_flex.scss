@@ -6,3 +6,13 @@
     @extend %flex;
     flex-direction: column;
 }
+
+%flex-row-center {
+  @extend %flex;
+  align-items: center;
+}
+
+%flex-center-between {
+  @extend %flex-row-center;
+  justify-content: space-between;
+}

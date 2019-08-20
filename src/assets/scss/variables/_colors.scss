@@ -1,9 +1,10 @@
 $white: #ffffff;
-$royal: #0a2896;
 $azure: #00a0df;
-$cerulean-blue: #3066BE;
+$tomato: #e02020;
 $black: #000000;
+$royal: #0a2896;
 $black-two: #1a1a1a;
+$cerulean-blue: #3066BE;
 $blue-blue: #1851c7;
 $blue-blue-two: #1750c6;
 $battleship-grey: #727887;
@@ -11,23 +12,29 @@ $off-white: #fff7e0;
 $yellow-orange: #f7b500;
 $light-peach: #fed6bb;
 $bright-orange: #fa6400;
-$tomato: #e02020;
 $apple-green: #7FB800;
+$success-green: #076200;
 $pale-grey: #e8ecf3;
 $white-two: #d8d8d8;
 $cloudy-blue: #c0c5d2;
+// VTB colors
+$vtb-red: #e21b1b;
+$vtb-green: #6ac259;
+$vtb-blue: #1a90ff;
 
 
-$success-color: $apple-green;
-$danger-color: $tomato;
+$success-color: $vtb-green;
+$danger-color: $vtb-red;
 
 // кнопки
-$btn-show-color: $azure;
-$btn-show-active-color: $cerulean-blue;
+$btn-show-color: $vtb-blue;
+$btn-show-active-color: $vtb-blue;
 $btn-border-color: $cloudy-blue;
-$btn-back-color: $azure;
+$btn-back-color: $vtb-blue;
 $btn-operation-color: $black;
+$switcher-success-color: $success-color;
+$switcher-danger-color: $danger-color;
 
 // scrollbar
-$scrollbar-color: $azure;
+$scrollbar-color: $vtb-blue;
 

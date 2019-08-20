@@ -5,7 +5,8 @@ module.exports = {
             splitChunks: false
         },
         output: {
-            filename: 'js/[name].js',
+            // filename: 'js/[name].js',
+            filename: 'js/auth.js',
         }
     }
 }
