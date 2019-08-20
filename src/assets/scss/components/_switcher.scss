@@ -18,7 +18,7 @@
 
 .switcher-wrap {
   @extend %flex;
-  background-color: $battleship-grey;
+  background: linear-gradient(90deg, $switcher-danger-color, $switcher-success-color);
   overflow: hidden;
   height: 20px;
   width: 60px;
