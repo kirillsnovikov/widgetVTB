@@ -16,3 +16,8 @@
   @extend %flex-row-center;
   justify-content: space-between;
 }
+
+%flex-center {
+  @extend %flex-row-center;
+  justify-content: center;
+}

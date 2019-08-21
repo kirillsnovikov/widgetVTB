@@ -27,7 +27,6 @@
     cursor: pointer;
     font-size: 25px;
     transition: all .3s;
-    transform: rotateX(0deg);
     &:hover {
       color: $btn-show-color;
     }

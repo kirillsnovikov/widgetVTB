@@ -1,7 +1,15 @@
-.success {
+%success {
   color: $success-color;
 }
 
-.danger {
+%danger {
   color: $danger-color;
+}
+
+.success {
+  @extend %success;
+}
+
+.danger {
+  @extend %danger;
 }

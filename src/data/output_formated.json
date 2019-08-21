@@ -9,9 +9,9 @@
       "AvailableInACC": true,
       "AvailableOnServiceProhibited": true,
       "ParentOperationIndex": 5,
-      "OperationStatus": "disabled",
+      "OperationStatus": "notselected",
       "ParametersIndexes": [],
-      "CheckType": "OkButton"
+      "CheckType": "ok-button"
     },
     {
       "Index": 1,
@@ -20,12 +20,12 @@
       "AvailableInACC": false,
       "AvailableOnServiceProhibited": false,
       "ParentOperationIndex": null,
-      "OperationStatus": "disabled",
+      "OperationStatus": "notselected",
       "ParametersIndexes": [
         0,
         1
       ],
-      "CheckType": "YesNoButtons"
+      "CheckType": "yes-no"
     },
     {
       "Index": 2,
@@ -34,7 +34,7 @@
       "AvailableInACC": false,
       "AvailableOnServiceProhibited": false,
       "ParentOperationIndex": null,
-      "OperationStatus": "disabled",
+      "OperationStatus": "notselected",
       "ParametersIndexes": [
         2,
         3,
@@ -56,7 +56,7 @@
         19,
         1
       ],
-      "CheckType": null
+      "CheckType": "sms"
     },
     {
       "Index": 3,
@@ -65,9 +65,9 @@
       "AvailableInACC": false,
       "AvailableOnServiceProhibited": false,
       "ParentOperationIndex": 7,
-      "OperationStatus": "disabled",
+      "OperationStatus": "notselected",
       "ParametersIndexes": [],
-      "CheckType": "YesNoButtons"
+      "CheckType": "yes-no"
     },
     {
       "Index": 4,
@@ -76,7 +76,7 @@
       "AvailableInACC": true,
       "AvailableOnServiceProhibited": false,
       "ParentOperationIndex": null,
-      "OperationStatus": "disabled",
+      "OperationStatus": "notselected",
       "ParametersIndexes": [
         4,
         6,
@@ -85,7 +85,7 @@
         14,
         1
       ],
-      "CheckType": "OkButton"
+      "CheckType": "ok-button"
     },
     {
       "Index": 5,
@@ -94,7 +94,7 @@
       "AvailableInACC": false,
       "AvailableOnServiceProhibited": false,
       "ParentOperationIndex": 4,
-      "OperationStatus": "disabled",
+      "OperationStatus": "notselected",
       "ParametersIndexes": [
         0,
         2,
@@ -117,7 +117,7 @@
         19,
         1
       ],
-      "CheckType": "YesNoButtons"
+      "CheckType": "yes-no"
     },
     {
       "Index": 6,
@@ -126,7 +126,7 @@
       "AvailableInACC": true,
       "AvailableOnServiceProhibited": true,
       "ParentOperationIndex": null,
-      "OperationStatus": "disabled",
+      "OperationStatus": "notselected",
       "ParametersIndexes": [
         0,
         2,
@@ -158,7 +158,7 @@
       "AvailableInACC": false,
       "AvailableOnServiceProhibited": false,
       "ParentOperationIndex": 6,
-      "OperationStatus": "disabled",
+      "OperationStatus": "notselected",
       "ParametersIndexes": [
         4,
         5,
@@ -168,7 +168,7 @@
         9,
         1
       ],
-      "CheckType": "YesNoButtons"
+      "CheckType": "yes-no"
     }
   ],
   "Parameters": [
@@ -178,8 +178,8 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
-      "Editable": true
+      "ParameterStatus": "success",
+      "Editable": false
     },
     {
       "Index": 1,
@@ -187,7 +187,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -196,7 +196,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -205,7 +205,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -214,7 +214,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -223,7 +223,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -232,7 +232,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -241,7 +241,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -250,7 +250,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -259,7 +259,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -268,7 +268,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -277,7 +277,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -286,7 +286,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -295,7 +295,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -304,7 +304,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -313,7 +313,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -322,7 +322,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -331,7 +331,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -340,7 +340,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     },
     {
@@ -349,7 +349,7 @@
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
       "Required": true,
-      "ParameterStatus": "disabled",
+      "ParameterStatus": "notselected",
       "Editable": true
     }
   ]

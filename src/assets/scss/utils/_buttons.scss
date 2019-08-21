@@ -1,0 +1,65 @@
+%check-btn {
+  @extend %flex-center;
+  height: 30px;
+  border-radius: 4px;
+  margin: 5px auto;
+  transition: background-color 0.1s linear;
+  transition: color 0.1s linear;
+  user-select: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: $check-btn-blue-color;
+}
+
+%check-btn-blue {
+  @extend %check-btn;
+  color: $white;
+  background: $check-btn-blue-color;
+  border: 1px solid $check-btn-blue-color;
+  &:hover {
+    background: rgba($check-btn-blue-color, 0.8);
+  }
+  &:active {
+    background-color: $white;
+    color: $check-btn-blue-color;
+  }
+}
+
+%ok-btn {
+  @extend %check-btn-blue;
+  width: 50px;
+}
+
+%yes-no-btn {
+  @extend %check-btn;
+  width: 50px;
+  color: 1px solid $check-btn-blue-color;
+  border: 1px solid $check-btn-blue-color;
+}
+
+%yes-btn {
+  @extend %yes-no-btn;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  &:hover {
+    background-color: rgba($yes-button-color, 0.4);
+  }
+  &:active {
+    background-color: $yes-button-color;
+    color: $white;
+  }
+}
+
+%no-btn {
+  @extend %yes-no-btn;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: none;
+  &:hover {
+    background-color: rgba($no-button-color, 0.2);
+  }
+  &:active {
+    background-color: rgba($no-button-color, 0.8);
+    color: $white;
+  }
+}

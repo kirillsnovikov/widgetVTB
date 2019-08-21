@@ -1,0 +1,17 @@
+.check {
+  @extend %flex-column;
+  &__ok-btn {
+    @extend %ok-btn;
+  }
+  &__yesno-btn {
+    @extend %flex;
+    margin: 5px auto;
+    justify-content: center;
+    &__left {
+      @extend %yes-btn;
+    }
+    &__right {
+      @extend %no-btn;
+    }
+  }
+}

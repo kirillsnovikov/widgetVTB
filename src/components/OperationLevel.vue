@@ -20,20 +20,25 @@
     <i class="icon-forward" v-if="currentOperation.Index === null"></i>
     <i class="icon-arrow_right" v-if="currentOperation.Index !== null"></i>
   </div>
-  <Switcher v-if="operations.length == 0" :switchers="parameters" v-bind:key="'switcher'"/>
-  <!-- <div v-if="computChecker('OkButton')"></div>
-  <div v-if="operations.length ===0 && parameters.length === 0 && operation.CheckType === 'YesNoButton'"></div>
-  <div v-if="operations.length ===0 && parameters.length === 0 && operation.CheckType === 'SMS'"></div> -->
+  <Switcher v-if="operations.length == 0 && parameters.length != 0" :switchers="parameters" v-bind:key="'switcher'"/>
+  <component v-if="operations.length == 0 && parameters.length == 0" v-bind:is="currentOperation.CheckType" :key="currentOperation.CheckType"></component>
 </transition-group>
 </div>
 </template>
 
 <script>
   import Switcher from '@/components/Switcher'
+  import YesNo from '@/components/checkers/YesNo'
+  import Sms from '@/components/checkers/Sms'
+  import OkButton from '@/components/checkers/OkButton'
+
   export default {
     name: 'OperationLevel',
     components: {
       Switcher,
+      YesNo,
+      Sms,
+      OkButton,
     },
     props: {
       operations: Array,

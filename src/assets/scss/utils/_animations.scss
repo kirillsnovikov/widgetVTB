@@ -37,3 +37,18 @@
 //   opacity: 0;
 // }
 // ==========================
+
+
+// анимация иконок свитчера
+.icon-show-enter-active, .icon-show-leave-active {
+  transition: all 0.3s;
+}
+.icon-show-enter, .icon-show-leave-to /* .widen-item-leave-active в версии ниже 2.1.8 */ {
+  opacity: 0;
+}
+// .show-widget-leave-to {
+//   transform: translateY(-50px);
+//   height: 0;
+//   opacity: 0;
+// }
+// ==========================

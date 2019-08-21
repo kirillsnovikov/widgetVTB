@@ -4,6 +4,7 @@
       <div class="switcher-text">{{switcher.ParameterName}}</div>
       <SwitcherButton :switcher="switcher"/>
     </div>
+    <div class="check__ok-btn" @click="applyParameters">OK</div>
   </div>
 </template>
 
@@ -16,5 +17,15 @@
     props: {
       switchers: Array
     },
+    data() {
+      return {
+        // apply: false
+      }
+    },
+    methods: {
+      applyParameters() {
+        console.log(this.switchers)
+      }
+    }
   }
 </script>
