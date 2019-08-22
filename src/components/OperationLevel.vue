@@ -12,8 +12,8 @@
   <!-- <Switcher /> -->
   <transition-group name="operation-button" mode="out-in">
     <div class="btn"
-    v-for="(operation) in operations"
-    v-bind:class="getClass"
+    v-for="operation in operations"
+    v-bind:class="getClass(operation.Status)"
     v-on:click="setOperationIndex(operation.Index)"
     v-bind:key="operation.OperationName">
     <span>{{operation.OperationName}}</span>
@@ -56,11 +56,23 @@
       }
     },
     computed: {
-      getClass() {
-        return {
+      getClass(status) {
+        let classes;
+        if (this.currentOperationIndex)
+          classes = 'btn-operation';
+        else
+          classes = 'btn-main-operation';
+
+        switch (status){
+          case 'success': classes += ' btn-operaton-success'; break;
+          case 'failed': classes += ' btn-operaton-failed'; break;
+          case 'notselected': classes += ' btn-operaton-notselected'; break;
+        }
+        return classes;
+        /*return {
           'btn-main-operation': this.currentOperationIndex === null,
           'btn-operation': this.currentOperationIndex !== null,
-        }
+        }*/
       }
     }
   }
