@@ -12,7 +12,7 @@
   <!-- <Switcher /> -->
   <transition-group name="operation-button" mode="out-in">
     <div class="btn"
-    v-for="(operation, i) in operations"
+    v-for="(operation) in operations"
     v-bind:class="getClass"
     v-on:click="setOperationIndex(operation.Index)"
     v-bind:key="operation.OperationName">
@@ -20,7 +20,7 @@
     <i class="icon-forward" v-if="currentOperation.Index === null"></i>
     <i class="icon-arrow_right" v-if="currentOperation.Index !== null"></i>
   </div>
-  <Switcher v-if="operations.length == 0 && parameters.length != 0" :switchers="parameters" v-bind:key="'switcher'"/>
+  <Switcher v-on:apply-parameters="applyParameters" v-if="operations.length == 0 && parameters.length != 0" :switchers="parameters" :operation="currentOperation" v-bind:key="'switcher'"/>
   <component v-if="operations.length == 0 && parameters.length == 0" v-bind:is="currentOperation.CheckType" :key="currentOperation.CheckType"></component>
 </transition-group>
 </div>
@@ -50,6 +50,9 @@
     methods: {
       setOperationIndex(index) {
         this.$emit('set-operation-index', index)
+      },
+      applyParameters(indexes) {
+        this.$emit('apply-parameters', indexes)
       }
     },
     computed: {

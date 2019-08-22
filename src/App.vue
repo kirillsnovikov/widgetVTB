@@ -16,7 +16,8 @@
         :currentOperation="getCurrentOperation"
         :parameters="getParameters"
         :parentOperationIndex="getParentOperationIndex"
-        v-on:set-operation-index="setOperationIndex"/>
+        v-on:set-operation-index="setOperationIndex"
+        @apply-parameters="applyParameters"/>
 
       </div>
     </transition>
@@ -45,6 +46,9 @@
     methods: {
       setOperationIndex(index) {
         this.operationsData.SelectedOperationIndex = index
+      },
+      applyParameters(indexes) {
+        console.log('я в App.vue! Пришло ' + indexes.length)
       }
     },
     computed: {

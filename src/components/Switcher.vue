@@ -1,6 +1,6 @@
 <template>
   <div class="switchers-layout">
-    <div class="switcher" v-for="(switcher, i) in switchers" :key="switcher.ParameterName">
+    <div class="switcher" v-for="(switcher) in switchers" :key="switcher.ParameterName">
       <div class="switcher-text">{{switcher.ParameterName}}</div>
       <SwitcherButton :switcher="switcher"/>
     </div>
@@ -15,7 +15,8 @@
       SwitcherButton
     },
     props: {
-      switchers: Array
+      switchers: Array,
+      operation: Object
     },
     data() {
       return {
@@ -24,7 +25,7 @@
     },
     methods: {
       applyParameters() {
-        console.log(this.switchers)
+        this.$emit('apply-parameters', this.operation.ParametersIndexes);
       }
     }
   }
