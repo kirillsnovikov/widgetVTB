@@ -25,7 +25,7 @@
     },
     methods: {
       applyParameters() {
-        this.$emit('apply-parameters', this.operation.ParametersIndexes);
+        this.$emit('apply-parameters', this.operation.ParametersIndexes, this.operation.Index);
       }
     }
   }

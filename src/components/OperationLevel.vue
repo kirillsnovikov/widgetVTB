@@ -51,8 +51,8 @@
       setOperationIndex(index) {
         this.$emit('set-operation-index', index)
       },
-      applyParameters(indexes) {
-        this.$emit('apply-parameters', indexes)
+      applyParameters(indexes, id) {
+        this.$emit('apply-parameters', indexes, id)
       }
     },
     computed: {

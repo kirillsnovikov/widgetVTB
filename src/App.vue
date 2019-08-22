@@ -47,14 +47,33 @@
       setOperationIndex(index) {
         this.operationsData.SelectedOperationIndex = index
       },
-      applyParameters(indexes) {
-        //ищем хотя бы одну проваленую операцию
+      applyParameters(indexes, id) {
+        console.log('я в App.vue! Пришло ' + indexes + '. Операция ' + id)
         var stoperFound = false;
-        for (i of indexes) {
-          if (this.operationsData.Parameters[i].ParameterStatus == 'failed')
-            console.log(1);
+
+        function lockThisParameters(ths) {
+          for (var i in indexes) {
+            if (ths.operationsData.Parameters[i].ParameterStatus != 'notselected') {
+              ths.operationsData.Parameters[i].Editable = false;
+            }
+          }
         }
-        console.log('я в App.vue! Пришло ' + indexes)
+
+        //ищем хотя бы одну проваленую операцию
+        for (let i of indexes) {
+          if (this.operationsData.Parameters[i].ParameterStatus == 'failed') {
+            stoperFound = true;
+            console.log('Найден проваленый параметр');
+          }
+        }
+
+        //если найдена проваленая операция, лочим все выбранные
+        if (stoperFound) {
+          console.log('Лочу');
+          lockThisParameters(this);
+          console.log('Меняю статус операции')
+          this.operationsData.Operations[id].OperationStatus = 'failed'
+        }
       }
     },
     computed: {
