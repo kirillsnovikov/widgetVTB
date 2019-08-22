@@ -48,7 +48,13 @@
         this.operationsData.SelectedOperationIndex = index
       },
       applyParameters(indexes) {
-        console.log('я в App.vue! Пришло ' + indexes.length)
+        //ищем хотя бы одну проваленую операцию
+        var stoperFound = false;
+        for (i of indexes) {
+          if (this.operationsData.Parameters[i].ParameterStatus == 'failed')
+            console.log(1);
+        }
+        console.log('я в App.vue! Пришло ' + indexes)
       }
     },
     computed: {
