@@ -5,11 +5,11 @@
       <div class="widget-header__main__status">
         <div class="widget-header__main__status__number success">
           <i class="icon-check"></i>
-          Клиент звонит с доверенного номера
+          <span>Клиент звонит с доверенного номера</span>
         </div>
         <div class="widget-header__main__status__operation danger">
           <i class="icon-remove"></i>
-          Аутентификация не проводилась
+          <span>Аутентификация не проводилась</span>
         </div>
       </div>
     </div>

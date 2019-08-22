@@ -1,26 +1,51 @@
 .btn {
-  width: 250px;
+  width: 240px;
   overflow: hidden;
   padding: 10px;
   border-radius: 5px;
-  margin-bottom: 5px;
+  //margin-bottom: 5px;
+  margin: 10px 5px;
   cursor: pointer;
-  &:last-child {
+  /*&:last-child {
     margin-bottom: 0;
-  }
+  }*/
 }
 
 .btn-main-operation {
   @extend %flex-center-between;
-  border: 1px solid $white-two;
+  //border: 1px solid $white-two;
+  box-shadow: 0 0 10px rgba($vtb-blue, 0.3);
+  transition: box-shadow 0.1s linear;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 14px;
+  &:hover {
+    box-shadow: 0 0 10px rgba($vtb-blue, 0.5);
+  }
+  i {
+    color: $vtb-blue;
+    font-size: 20px;
+    font-weight: lighter;
+  }
 }
 
 .btn-back {
   @extend %flex-row-center;
-  padding: 15px 10px;
-  @include button-color($btn-back-color);
+  //@include button-color($btn-back-color);
+  padding: 10px;
+  font-size: 14px;
+  background-color: rgba($btn-back-color, 0.1);
+  border: 1px solid $btn-back-color;
+  color: $btn-back-color;
+  transition: background-color 0.2s linear;
   span {
     margin-left: 10px;
+  }
+  &:hover {
+    background-color: rgba($btn-back-color, 0.2);
+  }
+  &:active {
+    background-color: $white;
   }
 }
 
