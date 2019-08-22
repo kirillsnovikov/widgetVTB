@@ -1,27 +1,32 @@
 <template>
-  <div class="widget-main-operations">
+  <!-- <div class="widget-main-operations"> -->
+  <div>
     <transition name="operation-button" mode="out-in">
-      <div class="btn btn-back"
+      <div :class="getClass"
       v-if="Object.keys(currentOperation).length !== 0"
-      v-on:click="setOperationIndex(parentOperationIndex)"
-      v-bind:key="currentOperation.OperationName">
-      <i class="icon-back"></i>
-      <span>{{currentOperation.OperationName}}</span>
-    </div>
-  </transition>
-  <!-- <Switcher /> -->
-  <transition-group name="operation-button" mode="out-in">
-    <div class="btn"
-    v-for="operation in operations"
-    v-bind:class="getClass(operation.Status)"
-    v-on:click="setOperationIndex(operation.Index)"
-    v-bind:key="operation.OperationName">
-    <span>{{operation.OperationName}}</span>
-    <i class="icon-forward" v-if="currentOperation.Index === null"></i>
-    <i class="icon-arrow_right" v-if="currentOperation.Index !== null"></i>
+      @click="setOperationIndex(parentOperationIndex)"
+      :key="currentOperation.OperationName">
+    <i class="icon-back"></i>
+    <span>{{currentOperation.OperationName}}</span>
   </div>
-  <Switcher v-on:apply-parameters="applyParameters" v-if="operations.length == 0 && parameters.length != 0" :switchers="parameters" :operation="currentOperation" v-bind:key="'switcher'"/>
-  <component v-if="operations.length == 0 && parameters.length == 0" v-bind:is="currentOperation.CheckType" :key="currentOperation.CheckType"></component>
+  </transition>
+  <transition-group name="operation-button" mode="out-in">
+    <OperationButton
+      v-for="operation in operations"
+      :key="operation.OperationName"
+      @set-operation-index="setOperationIndex"
+      :operation="operation"></OperationButton>
+  <Switcher
+    @apply-parameters="applyParameters"
+    v-if="operations.length == 0 && parameters.length != 0"
+    :switchers="parameters"
+    :operation="currentOperation"
+    :key="'switcher'"/>
+  <component
+    v-if="operations.length == 0 && parameters.length == 0"
+    :is="currentOperation.CheckType"
+    :key="currentOperation.CheckType"
+    :status="currentOperation.OperationStatus"></component>
 </transition-group>
 </div>
 </template>
@@ -31,14 +36,21 @@
   import YesNo from '@/components/checkers/YesNo'
   import Sms from '@/components/checkers/Sms'
   import OkButton from '@/components/checkers/OkButton'
+  import OperationButton from '@/components/OperationButton'
 
   export default {
     name: 'OperationLevel',
+    data() {
+      return {
+        status: null
+      }
+    },
     components: {
       Switcher,
       YesNo,
       Sms,
       OkButton,
+      OperationButton
     },
     props: {
       operations: Array,
@@ -47,32 +59,23 @@
       parameters: Array,
       parentOperationIndex: Number,
     },
+    computed: {
+      getClass() {
+        let classes = 'btn btn-back';
+        switch (this.currentOperation.OperationStatus){
+          case 'success': classes += ' btn-back__success'; break;
+          case 'notselected': classes += ' btn-back__notselected'; break;
+          case 'failed': classes += ' btn-back__failed'; break;
+        }
+        return classes;
+      }
+    },
     methods: {
       setOperationIndex(index) {
         this.$emit('set-operation-index', index)
       },
       applyParameters(indexes, id) {
         this.$emit('apply-parameters', indexes, id)
-      }
-    },
-    computed: {
-      getClass(status) {
-        let classes;
-        if (this.currentOperationIndex)
-          classes = 'btn-operation';
-        else
-          classes = 'btn-main-operation';
-
-        switch (status){
-          case 'success': classes += ' btn-operaton-success'; break;
-          case 'failed': classes += ' btn-operaton-failed'; break;
-          case 'notselected': classes += ' btn-operaton-notselected'; break;
-        }
-        return classes;
-        /*return {
-          'btn-main-operation': this.currentOperationIndex === null,
-          'btn-operation': this.currentOperationIndex !== null,
-        }*/
       }
     }
   }

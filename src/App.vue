@@ -49,7 +49,7 @@
       },
       applyParameters(indexes, id) {
         console.log('я в App.vue! Пришло ' + indexes + '. Операция ' + id)
-        var stoperFound = false;
+        var stopperFound = false;
 
         function lockThisParameters(ths) {
           for (var i in indexes) {
@@ -62,17 +62,38 @@
         //ищем хотя бы одну проваленую операцию
         for (let i of indexes) {
           if (this.operationsData.Parameters[i].ParameterStatus == 'failed') {
-            stoperFound = true;
+            stopperFound = true;
             console.log('Найден проваленый параметр');
+            break;
           }
         }
 
         //если найдена проваленая операция, лочим все выбранные
-        if (stoperFound) {
+        if (stopperFound) {
           console.log('Лочу');
           lockThisParameters(this);
-          console.log('Меняю статус операции')
+          console.log('Фэйлю операции')
           this.operationsData.Operations[id].OperationStatus = 'failed'
+        }
+        else {
+          for (let i in indexes) {
+            if (this.operationsData.Parameters[i].ParameterStatus == 'notselected' && this.operationsData.Parameters[i].Required) {
+              stopperFound = true;
+              console.log('Найден обязательный параметр параметр');
+              break;
+            }
+          }
+
+          //если найден хотя бы один незаполненный обязательный параметр
+          if (stopperFound) {
+            console.log('Надо бы показать пользаку, что он невнимательный')
+          }
+          else {
+            console.log('Лочу');
+            lockThisParameters(this);
+            console.log('Саксесю операции')
+            this.operationsData.Operations[id].OperationStatus = 'success'
+          }
         }
       }
     },
