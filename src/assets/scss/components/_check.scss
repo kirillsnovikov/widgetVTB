@@ -14,15 +14,68 @@
     @extend %flex;
     margin: 5px auto;
     justify-content: center;
+    &__inactive_left {
+      @extend %yes-no-btn;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      background-color: rgba($middle-gray, 0.2);
+      cursor: default !important;
+    }
     &__left {
-      @extend %yes-btn;
+      //@extend %yes-btn;
+      @extend %yes-no-btn;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      &:hover {
+        background-color: rgba($yes-button-color, 0.4);
+      }
+      &:active {
+        background-color: rgba($yes-button-color, 0.8);
+        color: $white;
+      }
       transition: background-color $transition;
       transition: color $transition;
     }
+    &__match_left {
+      @extend %yes-no-btn;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      background-color: rgba($yes-button-color, 0.8);
+      color: $white !important;
+      cursor: default !important;
+    }
+    &__inactive_right {
+      @extend %yes-no-btn;
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+      background-color: rgba($middle-gray, 0.2);
+      cursor: default !important;
+      border-left: none !important;
+    }
     &__right {
-      @extend %no-btn;
+      //@extend %no-btn;
+      @extend %yes-no-btn;
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+      border-left: none !important;
+      &:hover {
+        background-color: rgba($no-button-color, 0.2);
+      }
+      &:active {
+        background-color: rgba($no-button-color, 0.6);
+        color: $white;
+      }
       transition: background-color $transition;
       transition: color $transition;
+    }
+    &__match_right {
+      @extend %yes-no-btn;
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+      background-color: rgba($no-button-color, 0.6);
+      color: $white !important;
+      cursor: default !important;
+      border-left: none !important;
     }
   }
   &-btn-green{

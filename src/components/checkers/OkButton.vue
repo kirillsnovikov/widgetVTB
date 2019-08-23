@@ -34,7 +34,7 @@
     },
     methods: {
       applyOperation() {
-        if (this.commentText != '') {
+        if (!(this.operation.Comment == true && this.commentText == '')) {
           this.$emit('apply-operation', this.operation.Index, this.commentText, 'success');
         }
       }
