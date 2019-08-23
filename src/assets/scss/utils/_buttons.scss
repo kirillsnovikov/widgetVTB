@@ -16,8 +16,8 @@
   color: $white;
   background: $check-btn-blue-color;
   border: 1px solid $check-btn-blue-color;
-  transition: background-color 0.1s linear;
-  transition: color 0.1s linear;
+  transition: background-color $transition;
+  transition: color $transition;
   &:hover {
     background: rgba($check-btn-blue-color, 0.8);
   }
@@ -47,7 +47,7 @@
     background-color: rgba($yes-button-color, 0.4);
   }
   &:active {
-    background-color: $yes-button-color;
+    background-color: rgba($yes-button-color, 0.8);
     color: $white;
   }
 }
@@ -61,7 +61,7 @@
     background-color: rgba($no-button-color, 0.2);
   }
   &:active {
-    background-color: rgba($no-button-color, 0.8);
+    background-color: rgba($no-button-color, 0.6);
     color: $white;
   }
 }

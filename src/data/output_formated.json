@@ -11,7 +11,8 @@
       "ParentOperationIndex": 5,
       "OperationStatus": "notselected",
       "ParametersIndexes": [],
-      "CheckType": "ok-button"
+      "CheckType": "ok-button",
+      "Comment": true
     },
     {
       "Index": 1,
@@ -25,7 +26,8 @@
         0,
         1
       ],
-      "CheckType": "yes-no"
+      "CheckType": "yes-no",
+      "Comment": false
     },
     {
       "Index": 2,
@@ -56,7 +58,8 @@
         19,
         1
       ],
-      "CheckType": "sms"
+      "CheckType": "sms",
+      "Comment": false
     },
     {
       "Index": 3,
@@ -67,7 +70,8 @@
       "ParentOperationIndex": 7,
       "OperationStatus": "notselected",
       "ParametersIndexes": [],
-      "CheckType": "yes-no"
+      "CheckType": "yes-no",
+      "Comment": false
     },
     {
       "Index": 4,
@@ -85,7 +89,8 @@
         14,
         1
       ],
-      "CheckType": "ok-button"
+      "CheckType": "ok-button",
+      "Comment": false
     },
     {
       "Index": 5,
@@ -117,7 +122,8 @@
         19,
         1
       ],
-      "CheckType": "yes-no"
+      "CheckType": "yes-no",
+      "Comment": false
     },
     {
       "Index": 6,
@@ -149,7 +155,8 @@
         19,
         1
       ],
-      "CheckType": null
+      "CheckType": null,
+      "Comment": false
     },
     {
       "Index": 7,
@@ -168,7 +175,8 @@
         9,
         1
       ],
-      "CheckType": "yes-no"
+      "CheckType": "yes-no",
+      "Comment": false
     }
   ],
   "Parameters": [

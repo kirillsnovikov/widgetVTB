@@ -17,7 +17,8 @@
         :parameters="getParameters"
         :parentOperationIndex="getParentOperationIndex"
         v-on:set-operation-index="setOperationIndex"
-        @apply-parameters="applyParameters"/>
+        @apply-parameters="applyParameters"
+        @apply-operation="applyOperation"/>
 
       </div>
     </transition>
@@ -48,7 +49,6 @@
         this.operationsData.SelectedOperationIndex = index
       },
       applyParameters(indexes, id) {
-        console.log('я в App.vue! Пришло ' + indexes + '. Операция ' + id)
         var stopperFound = false;
 
         function lockThisParameters(ths) {
@@ -63,23 +63,19 @@
         for (let i of indexes) {
           if (this.operationsData.Parameters[i].ParameterStatus == 'failed') {
             stopperFound = true;
-            console.log('Найден проваленый параметр');
             break;
           }
         }
 
         //если найдена проваленая операция, лочим все выбранные
         if (stopperFound) {
-          console.log('Лочу');
           lockThisParameters(this);
-          console.log('Фэйлю операции')
           this.operationsData.Operations[id].OperationStatus = 'failed'
         }
         else {
           for (let i in indexes) {
             if (this.operationsData.Parameters[i].ParameterStatus == 'notselected' && this.operationsData.Parameters[i].Required) {
               stopperFound = true;
-              console.log('Найден обязательный параметр параметр');
               break;
             }
           }
@@ -89,12 +85,14 @@
             console.log('Надо бы показать пользаку, что он невнимательный')
           }
           else {
-            console.log('Лочу');
             lockThisParameters(this);
-            console.log('Саксесю операции')
             this.operationsData.Operations[id].OperationStatus = 'success'
           }
         }
+      },
+      applyOperation(index, text, newstatus) {
+        this.operationsData.Operations[index].CommentText = text;
+        this.operationsData.Operations[index].OperationStatus = newstatus;
       }
     },
     computed: {

@@ -18,10 +18,6 @@
         computed: {
             getClass() {
                 let classes = 'btn-main-operation';
-                /*if (this.operation.ParentOperationIndex)
-                    classes = 'btn-operation';
-                else
-                    classes = 'btn-main-operation';*/
 
                 switch (this.operation.OperationStatus){
                     case 'success': classes += ' btn-main-operation__success'; break;

@@ -23,11 +23,21 @@
       :switchers="parameters"
       :operation="currentOperation"
       :key="'switcher'"/>
-    <component
+    <section
       v-if="operations.length == 0 && parameters.length == 0"
-      :is="currentOperation.CheckType"
-      :key="currentOperation.CheckType"
-      :status="currentOperation.OperationStatus"></component>
+      :key="'section_' + currentOperation.CheckType">
+      <div class="check__text">{{currentOperation.OperationText}}</div>
+      <textarea
+        v-if="currentOperation.Comment == true"
+        class="check__input"
+        v-model="commentText"></textarea>
+      <component
+        :is="currentOperation.CheckType"
+        :key="currentOperation.CheckType"
+        :operation="currentOperation"
+        :commentText="commentText"
+        @apply-operation="applyOperation"></component>
+    </section>
 </transition-group>
 </div>
 </template>
@@ -43,7 +53,7 @@
     name: 'OperationLevel',
     data() {
       return {
-        status: null
+        commentText: ''
       }
     },
     components: {
@@ -73,10 +83,13 @@
     },
     methods: {
       setOperationIndex(index) {
-        this.$emit('set-operation-index', index)
+        this.$emit('set-operation-index', index);
       },
       applyParameters(indexes, id) {
-        this.$emit('apply-parameters', indexes, id)
+        this.$emit('apply-parameters', indexes, id);
+      },
+      applyOperation(index, text, newstatus) {
+        this.$emit('apply-operation', index, text, newstatus);
       }
     }
   }

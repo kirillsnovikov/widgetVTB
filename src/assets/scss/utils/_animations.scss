@@ -24,7 +24,7 @@
 
 // анимация появления виджета
 .show-widget-enter-active, .show-widget-leave-active {
-  transition: all 0.2s;
+  transition: all $transition;
 }
 .show-widget-enter, .show-widget-leave-to /* .widen-item-leave-active в версии ниже 2.1.8 */ {
   transform: translateY(-50px);

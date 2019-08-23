@@ -1,9 +1,14 @@
 <template>
-  <div>sms</div>
+  <section>
+    <div>sms</div>
+  </section>
 </template>
 
 <script>
   export default {
-    name: 'sms'
+    name: 'sms',
+    props: {
+      operation: Object
+    }
   }
 </script>

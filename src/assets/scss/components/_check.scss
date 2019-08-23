@@ -3,15 +3,26 @@
   &__ok-btn {
     @extend %ok-btn;
   }
+  &__inactive-ok{
+    @extend %check-btn;
+    width: 50px;
+    background-color: rgba($middle-gray, 0.2);
+    border: 1px solid $check-btn-blue-color;
+    cursor: default !important;
+  }
   &__yesno-btn {
     @extend %flex;
     margin: 5px auto;
     justify-content: center;
     &__left {
       @extend %yes-btn;
+      transition: background-color $transition;
+      transition: color $transition;
     }
     &__right {
       @extend %no-btn;
+      transition: background-color $transition;
+      transition: color $transition;
     }
   }
   &-btn-green{
@@ -29,5 +40,23 @@
     background: $vtb-red;
     border: 1px solid $vtb-red;
     cursor: default!important;
+  }
+  &__input{
+    width: 240px;
+    height: 80px;
+    border-radius: 4px;
+    border: 1px solid $vtb-blue;
+    margin: 0 5px 5px 5px;
+    resize: vertical;
+    &:focus{
+      outline: none;
+    }
+  }
+  &__text{
+    display: flex;
+    margin: 5px auto;
+    justify-content: center;
+    width: 240px;
+    font-size: 13px;
   }
 }
