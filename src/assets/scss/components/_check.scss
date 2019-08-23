@@ -14,4 +14,20 @@
       @extend %no-btn;
     }
   }
+  &-btn-green{
+    @extend %check-btn;
+    width: 50px;
+    color: $white!important;
+    background: $vtb-green;
+    border: 1px solid $vtb-green;
+    cursor: default!important;
+  }
+  &-btn-red{
+    @extend %check-btn;
+    width: 50px;
+    color: $white!important;
+    background: $vtb-red;
+    border: 1px solid $vtb-red;
+    cursor: default!important;
+  }
 }

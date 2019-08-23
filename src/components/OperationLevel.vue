@@ -2,11 +2,12 @@
   <!-- <div class="widget-main-operations"> -->
   <div>
     <transition name="operation-button" mode="out-in">
-      <div :class="getClass"
-      v-if="Object.keys(currentOperation).length !== 0"
-      @click="setOperationIndex(parentOperationIndex)"
-      :key="currentOperation.OperationName">
-    <i class="icon-back"></i>
+      <div
+        :class="getClass"
+        v-if="Object.keys(currentOperation).length !== 0"
+        @click="setOperationIndex(parentOperationIndex)"
+        :key="currentOperation.OperationName">
+      <i class="icon-back"></i>
     <span>{{currentOperation.OperationName}}</span>
   </div>
   </transition>
@@ -16,17 +17,17 @@
       :key="operation.OperationName"
       @set-operation-index="setOperationIndex"
       :operation="operation"></OperationButton>
-  <Switcher
-    @apply-parameters="applyParameters"
-    v-if="operations.length == 0 && parameters.length != 0"
-    :switchers="parameters"
-    :operation="currentOperation"
-    :key="'switcher'"/>
-  <component
-    v-if="operations.length == 0 && parameters.length == 0"
-    :is="currentOperation.CheckType"
-    :key="currentOperation.CheckType"
-    :status="currentOperation.OperationStatus"></component>
+    <Switcher
+      @apply-parameters="applyParameters"
+      v-if="operations.length == 0 && parameters.length != 0"
+      :switchers="parameters"
+      :operation="currentOperation"
+      :key="'switcher'"/>
+    <component
+      v-if="operations.length == 0 && parameters.length == 0"
+      :is="currentOperation.CheckType"
+      :key="currentOperation.CheckType"
+      :status="currentOperation.OperationStatus"></component>
 </transition-group>
 </div>
 </template>

@@ -4,7 +4,7 @@
       <div class="switcher-text">{{switcher.ParameterName}}</div>
       <SwitcherButton :switcher="switcher"/>
     </div>
-    <div class="check__ok-btn" @click="applyParameters">OK</div>
+    <div :class="getBtnClass" @click="applyParameters">OK</div>
   </div>
 </template>
 
@@ -23,9 +23,22 @@
         // apply: false
       }
     },
+    computed: {
+      getBtnClass() {
+        let bclass;
+        console.log(this.operation.OperationStatus);
+        switch (this.operation.OperationStatus) {
+          case 'success': bclass = 'check-btn-green'; break;
+          case 'failed': bclass = 'check-btn-red'; break;
+          case 'notselected': bclass = 'check__ok-btn'; break;
+        }
+        return bclass;
+      }
+    },
     methods: {
       applyParameters() {
-        this.$emit('apply-parameters', this.operation.ParametersIndexes, this.operation.Index);
+        if (this.operation.OperationStatus == 'notselected')
+          this.$emit('apply-parameters', this.operation.ParametersIndexes, this.operation.Index);
       }
     }
   }

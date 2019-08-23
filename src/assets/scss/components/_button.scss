@@ -24,9 +24,9 @@
     font-weight: lighter;
   }
   &__success {
-    box-shadow: 0 0 10px rgba($yes-button-color, 0.3);
+    box-shadow: 0 0 10px rgba($yes-button-color, 0.5);
     &:hover {
-      box-shadow: 0 0 10px rgba($yes-button-color, 0.5);
+      box-shadow: 0 0 10px rgba($yes-button-color, 0.8);
     }
   }
   &__notselected {

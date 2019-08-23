@@ -3,8 +3,8 @@
   height: 30px;
   border-radius: 4px;
   margin: 5px auto;
-  transition: background-color 0.1s linear;
-  transition: color 0.1s linear;
+  /*transition: background-color 0.1s linear;
+  transition: color 0.1s linear;*/
   user-select: none;
   cursor: pointer;
   font-size: 12px;
@@ -16,6 +16,8 @@
   color: $white;
   background: $check-btn-blue-color;
   border: 1px solid $check-btn-blue-color;
+  transition: background-color 0.1s linear;
+  transition: color 0.1s linear;
   &:hover {
     background: rgba($check-btn-blue-color, 0.8);
   }
