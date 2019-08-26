@@ -1,6 +1,6 @@
 {
   "clientName": "Иван Петрович",
-  "selectedOperationsHierarchy": [],
+  "SelectedOperationIndex": null,
   "Operations": [
     {
       "Index": 0,
@@ -23,7 +23,7 @@
       "AvailableOnServiceProhibited": false,
       "Comment": false,
       "HintText": "",
-      "ParentOperationIndex": 1,
+      "ParentOperationIndex": null,
       "OperationStatus": "notselected",
       "ParametersIndexes": [
         0,
