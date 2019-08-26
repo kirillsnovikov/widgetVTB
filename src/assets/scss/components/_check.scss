@@ -22,7 +22,6 @@
       cursor: default !important;
     }
     &__left {
-      //@extend %yes-btn;
       @extend %yes-no-btn;
       border-top-right-radius: 0 !important;
       border-bottom-right-radius: 0 !important;
@@ -53,7 +52,6 @@
       border-left: none !important;
     }
     &__right {
-      //@extend %no-btn;
       @extend %yes-no-btn;
       border-top-left-radius: 0 !important;
       border-bottom-left-radius: 0 !important;

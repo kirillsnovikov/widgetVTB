@@ -1,6 +1,6 @@
 {
-  "ClientName": "Иван Петрович",
-  "SelectedOperationIndex": null,
+  "clientName": "Иван Петрович",
+  "selectedOperationsHierarchy": [],
   "Operations": [
     {
       "Index": 0,
@@ -8,11 +8,12 @@
       "OperationText": "двадвадва",
       "AvailableInACC": true,
       "AvailableOnServiceProhibited": true,
+      "Comment": true,
+      "HintText": "",
       "ParentOperationIndex": 5,
       "OperationStatus": "notselected",
       "ParametersIndexes": [],
-      "CheckType": "ok-button",
-      "Comment": true
+      "CheckType": "ok-button"
     },
     {
       "Index": 1,
@@ -20,14 +21,15 @@
       "OperationText": "",
       "AvailableInACC": false,
       "AvailableOnServiceProhibited": false,
-      "ParentOperationIndex": null,
+      "Comment": false,
+      "HintText": "",
+      "ParentOperationIndex": 1,
       "OperationStatus": "notselected",
       "ParametersIndexes": [
         0,
         1
       ],
-      "CheckType": "yes-no",
-      "Comment": false
+      "CheckType": "yes-no-buttons"
     },
     {
       "Index": 2,
@@ -35,6 +37,8 @@
       "OperationText": "",
       "AvailableInACC": false,
       "AvailableOnServiceProhibited": false,
+      "Comment": false,
+      "HintText": "",
       "ParentOperationIndex": null,
       "OperationStatus": "notselected",
       "ParametersIndexes": [
@@ -58,8 +62,7 @@
         19,
         1
       ],
-      "CheckType": "sms",
-      "Comment": false
+      "CheckType": null
     },
     {
       "Index": 3,
@@ -67,18 +70,21 @@
       "OperationText": "",
       "AvailableInACC": false,
       "AvailableOnServiceProhibited": false,
+      "Comment": false,
+      "HintText": "",
       "ParentOperationIndex": 7,
       "OperationStatus": "notselected",
       "ParametersIndexes": [],
-      "CheckType": "yes-no",
-      "Comment": false
+      "CheckType": "yes-no-buttons"
     },
     {
       "Index": 4,
       "OperationName": "два",
       "OperationText": "два",
       "AvailableInACC": true,
-      "AvailableOnServiceProhibited": false,
+      "AvailableOnServiceProhibited": true,
+      "Comment": true,
+      "HintText": "двадва",
       "ParentOperationIndex": null,
       "OperationStatus": "notselected",
       "ParametersIndexes": [
@@ -89,8 +95,7 @@
         14,
         1
       ],
-      "CheckType": "ok-button",
-      "Comment": false
+      "CheckType": "ok-button"
     },
     {
       "Index": 5,
@@ -98,6 +103,8 @@
       "OperationText": "два 1",
       "AvailableInACC": false,
       "AvailableOnServiceProhibited": false,
+      "Comment": true,
+      "HintText": "два 1два 1",
       "ParentOperationIndex": 4,
       "OperationStatus": "notselected",
       "ParametersIndexes": [
@@ -122,8 +129,7 @@
         19,
         1
       ],
-      "CheckType": "yes-no",
-      "Comment": false
+      "CheckType": "yes-no-buttons"
     },
     {
       "Index": 6,
@@ -131,6 +137,8 @@
       "OperationText": "раз",
       "AvailableInACC": true,
       "AvailableOnServiceProhibited": true,
+      "Comment": true,
+      "HintText": "разраз",
       "ParentOperationIndex": null,
       "OperationStatus": "notselected",
       "ParametersIndexes": [
@@ -155,8 +163,7 @@
         19,
         1
       ],
-      "CheckType": null,
-      "Comment": false
+      "CheckType": null
     },
     {
       "Index": 7,
@@ -164,6 +171,8 @@
       "OperationText": "раз 1",
       "AvailableInACC": false,
       "AvailableOnServiceProhibited": false,
+      "Comment": true,
+      "HintText": "раз 1раз 1",
       "ParentOperationIndex": 6,
       "OperationStatus": "notselected",
       "ParametersIndexes": [
@@ -175,190 +184,189 @@
         9,
         1
       ],
-      "CheckType": "yes-no",
-      "Comment": false
+      "CheckType": "yes-no-buttons"
     }
   ],
   "Parameters": [
     {
       "Index": 0,
       "ParameterName": "%-ная ставка по вкладу",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "success",
-      "Editable": false
+      "Required": true
     },
     {
       "Index": 1,
       "ParameterName": "ФИО",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 2,
       "ParameterName": "1 из 5 последних успешных операций",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 3,
       "ParameterName": "Sms-код",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 4,
       "ParameterName": "Адрес регистрации",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 5,
       "ParameterName": "Адрес фактического проживания",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 6,
       "ParameterName": "Вид на жительство",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 7,
       "ParameterName": "Военный билет/удостоверение офицера",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 8,
       "ParameterName": "Временное удостоверение личности",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 9,
       "ParameterName": "Дата открытия/пролонгации вклада",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 10,
       "ParameterName": "Дата рождения",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 11,
       "ParameterName": "Доверенный номер телефона",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 12,
       "ParameterName": "Доп. параметр 1",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 13,
       "ParameterName": "Доп. параметр 2",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 14,
       "ParameterName": "Заграничный паспорт",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 15,
       "ParameterName": "Название вклада",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 16,
       "ParameterName": "Размер кредитного лимита/овердрафта",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 17,
       "ParameterName": "Серия и номер паспорта",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 18,
       "ParameterName": "Срок действия карты",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     },
     {
       "Index": 19,
       "ParameterName": "Сумма вклада",
+      "ParameterStatus": "notselected",
+      "Editable": true,
       "AvalibleWithTrustedNumber": true,
       "AvalibleWithUntrustedNumber": true,
-      "Required": true,
-      "ParameterStatus": "notselected",
-      "Editable": true
+      "Required": true
     }
   ]
 }
