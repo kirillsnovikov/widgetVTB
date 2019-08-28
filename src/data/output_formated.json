@@ -13,7 +13,7 @@
       "ParentOperationIndex": 5,
       "OperationStatus": "notselected",
       "ParametersIndexes": [],
-      "CheckType": "ok-button"
+      "CheckType": "OkButton"
     },
     {
       "Index": 1,
@@ -29,7 +29,7 @@
         0,
         1
       ],
-      "CheckType": "yes-no-buttons"
+      "CheckType": "YesNo"
     },
     {
       "Index": 2,
@@ -41,28 +41,11 @@
       "HintText": "",
       "ParentOperationIndex": null,
       "OperationStatus": "notselected",
-      "ParametersIndexes": [
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        1
-      ],
-      "CheckType": null
+      "ParametersIndexes": [],
+      "CheckType": "Sms",
+      "Seconds": 15,
+      "Interval": null,
+      "CodeSent": false
     },
     {
       "Index": 3,
@@ -75,7 +58,7 @@
       "ParentOperationIndex": 7,
       "OperationStatus": "notselected",
       "ParametersIndexes": [],
-      "CheckType": "yes-no-buttons"
+      "CheckType": "YesNo"
     },
     {
       "Index": 4,
@@ -129,7 +112,7 @@
         19,
         1
       ],
-      "CheckType": "yes-no-buttons"
+      "CheckType": "YesNo"
     },
     {
       "Index": 6,
@@ -184,7 +167,7 @@
         9,
         1
       ],
-      "CheckType": "yes-no-buttons"
+      "CheckType": "YesNo"
     }
   ],
   "Parameters": [

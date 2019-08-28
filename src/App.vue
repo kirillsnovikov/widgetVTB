@@ -16,9 +16,10 @@
         :currentOperation="getCurrentOperation"
         :parameters="getParameters"
         :parentOperationIndex="getParentOperationIndex"
-        v-on:set-operation-index="setOperationIndex"
+        @set-operation-index="setOperationIndex"
         @apply-parameters="applyParameters"
-        @apply-operation="applyOperation"/>
+        @apply-operation="applyOperation"
+        @start-sms-countdown="startSmsCountdown"/>
 
       </div>
     </transition>
@@ -93,6 +94,18 @@
       applyOperation(index, text, newstatus) {
         this.operationsData.Operations[index].CommentText = text;
         this.operationsData.Operations[index].OperationStatus = newstatus;
+      },
+      startSmsCountdown(index) {
+        this.operationsData.Operations[index].Interval = setInterval(() => {
+          if (this.operationsData.Operations[index].Seconds == 0) {
+            clearInterval(this.operationsData.Operations[index].Interval);
+            this.operationsData.Operations[index].Interval = null;
+            this.operationsData.Operations[index].Seconds = 15;
+          }
+          else {
+            this.operationsData.Operations[index].Seconds -= 1;
+          }
+        }, 1000)
       }
     },
     computed: {

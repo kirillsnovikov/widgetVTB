@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'ok-button',
+    name: 'OkButton',
     props: {
       operation: Object,
       commentText: String

@@ -36,7 +36,8 @@
         :key="currentOperation.CheckType"
         :operation="currentOperation"
         :commentText="commentText"
-        @apply-operation="applyOperation"></component>
+        @apply-operation="applyOperation"
+        @start-sms-countdown="startSmsCountdown"></component>
     </section>
 </transition-group>
 </div>
@@ -90,6 +91,9 @@
       },
       applyOperation(index, text, newstatus) {
         this.$emit('apply-operation', index, text, newstatus);
+      },
+      startSmsCountdown(index) {
+        this.$emit('start-sms-countdown', index);
       }
     }
   }
