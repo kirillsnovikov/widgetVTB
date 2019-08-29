@@ -1,168 +1,175 @@
 .check {
-  @extend %flex-column;
-  &__ok-btn {
-    @extend %check-btn-blue;
-    width: 50px;
-    //@extend %ok-btn;
-  }
-  &__inactive-ok{
-    @extend %check-btn;
-    width: 50px;
-    background-color: rgba($middle-gray, 0.2);
-    border: 1px solid $check-btn-blue-color;
-    cursor: default !important;
-  }
-  &__yesno-btn {
-    @extend %flex;
-    margin: 5px auto;
-    justify-content: center;
-    &__inactive_left {
-      @extend %yes-no-btn;
-      border-top-right-radius: 0 !important;
-      border-bottom-right-radius: 0 !important;
-      background-color: rgba($middle-gray, 0.2);
-      cursor: default !important;
+    @extend %flex-column;
+    &__ok-btn {
+        @extend %check-btn-blue;
+        width: 50px;
+        //@extend %ok-btn;
     }
-    &__left {
-      @extend %yes-no-btn;
-      border-top-right-radius: 0 !important;
-      border-bottom-right-radius: 0 !important;
-      &:hover {
-        background-color: rgba($yes-button-color, 0.4);
-      }
-      &:active {
-        background-color: rgba($yes-button-color, 0.8);
-        color: $white;
-      }
-      transition: background-color $transition;
-      transition: color $transition;
+    &__inactive-ok{
+        @extend %check-btn;
+        width: 50px;
+        background-color: rgba($middle-gray, 0.2);
+        border: 1px solid $check-btn-blue-color;
+        cursor: default !important;
     }
-    &__match_left {
-      @extend %yes-no-btn;
-      border-top-right-radius: 0 !important;
-      border-bottom-right-radius: 0 !important;
-      background-color: rgba($yes-button-color, 0.8);
-      color: $white !important;
-      cursor: default !important;
+    &__yesno-btn {
+        @extend %flex;
+        margin: 5px auto;
+        justify-content: center;
+        &__inactive_left {
+            @extend %yes-no-btn;
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+            background-color: rgba($middle-gray, 0.2);
+            cursor: default !important;
+        }
+        &__left {
+            @extend %yes-no-btn;
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+            transition: background-color $transition;
+            transition: color $transition;
+            &:hover {
+                background-color: rgba($yes-button-color, 0.4);
+            }
+            &:active {
+                background-color: rgba($yes-button-color, 0.8);
+                color: $white;
+            }
+        }
+        &__match_left {
+            @extend %yes-no-btn;
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+            background-color: rgba($yes-button-color, 0.8);
+            color: $white !important;
+            cursor: default !important;
+        }
+        &__inactive_right {
+            @extend %yes-no-btn;
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            background-color: rgba($middle-gray, 0.2);
+            cursor: default !important;
+            border-left: none !important;
+        }
+        &__right {
+            @extend %yes-no-btn;
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            border-left: none !important;
+            transition: background-color $transition;
+            transition: color $transition;
+            &:hover {
+                background-color: rgba($no-button-color, 0.2);
+            }
+            &:active {
+                background-color: rgba($no-button-color, 0.6);
+                color: $white;
+            }
+        }
+        &__match_right {
+            @extend %yes-no-btn;
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            background-color: rgba($no-button-color, 0.6);
+            color: $white !important;
+            cursor: default !important;
+            border-left: none !important;
+        }
     }
-    &__inactive_right {
-      @extend %yes-no-btn;
-      border-top-left-radius: 0 !important;
-      border-bottom-left-radius: 0 !important;
-      background-color: rgba($middle-gray, 0.2);
-      cursor: default !important;
-      border-left: none !important;
+    &-btn-green{
+        @extend %check-btn;
+        width: 50px;
+        color: $white!important;
+        background: $vtb-green;
+        border: 1px solid $vtb-green;
+        cursor: default!important;
     }
-    &__right {
-      @extend %yes-no-btn;
-      border-top-left-radius: 0 !important;
-      border-bottom-left-radius: 0 !important;
-      border-left: none !important;
-      &:hover {
-        background-color: rgba($no-button-color, 0.2);
-      }
-      &:active {
-        background-color: rgba($no-button-color, 0.6);
-        color: $white;
-      }
-      transition: background-color $transition;
-      transition: color $transition;
+    &-btn-red{
+        @extend %check-btn;
+        width: 50px;
+        color: $white!important;
+        background: $vtb-red;
+        border: 1px solid $vtb-red;
+        cursor: default!important;
     }
-    &__match_right {
-      @extend %yes-no-btn;
-      border-top-left-radius: 0 !important;
-      border-bottom-left-radius: 0 !important;
-      background-color: rgba($no-button-color, 0.6);
-      color: $white !important;
-      cursor: default !important;
-      border-left: none !important;
+    &__input{
+        width: 240px;
+        height: 80px;
+        border-radius: 4px;
+        border: 1px solid $vtb-blue;
+        margin: 0 5px 5px 5px;
+        resize: vertical;
+        &:focus{
+            outline: none;
+        }
     }
-  }
-  &-btn-green{
-    @extend %check-btn;
-    width: 50px;
-    color: $white!important;
-    background: $vtb-green;
-    border: 1px solid $vtb-green;
-    cursor: default!important;
-  }
-  &-btn-red{
-    @extend %check-btn;
-    width: 50px;
-    color: $white!important;
-    background: $vtb-red;
-    border: 1px solid $vtb-red;
-    cursor: default!important;
-  }
-  &__input{
-    width: 240px;
-    height: 80px;
-    border-radius: 4px;
-    border: 1px solid $vtb-blue;
-    margin: 0 5px 5px 5px;
-    resize: vertical;
-    &:focus{
-      outline: none;
+    &__text{
+        display: flex;
+        margin: 5px auto;
+        justify-content: center;
+        width: 240px;
+        font-size: 13px;
     }
-  }
-  &__text{
-    display: flex;
-    margin: 5px auto;
-    justify-content: center;
-    width: 240px;
-    font-size: 13px;
-  }
-  &__sms-btn-active{
-    @extend %check-btn-blue;
-    width: 240px;
-    margin-left: 5px !important;
-  }
-  &__sms-btn-inactive{
-    @extend %check-btn-blue;
-    width: 240px;
-    margin-left: 5px !important;
-    background-color: rgba($middle-gray, 0.2) !important;
-    color: $vtb-blue !important;
-  }
-  &__countdown{
-    width: 240px;
-    font-size: 10px;
-    margin: 5px auto 5px 5px;
-    text-align: center;
-    overflow: hidden;
-    transition: height $transition;
-  }
-  &__countdown-active{
-    height: 13px;
-  }
-  &__countdown-inactive{
-    height: 0px;
-  }
-  &__code-input{
-    display: flex;
-    float: left;
-    width: 115px;
-    height: 30px;
-    font-size: 12px;
-    margin: 0 10px 0 5px;
-    text-align: center;
-    border-radius: 4px;
-    &:focus{
-      outline: none;
+    &__sms-btn-active{
+        @extend %check-btn-blue;
+        width: 240px;
+        margin-left: 5px !important;
     }
-    &:hover{
-      outline: none;
+    &__sms-btn-inactive{
+        @extend %check-btn-blue;
+        width: 240px;
+        margin-left: 5px !important;
+        background-color: rgba($middle-gray, 0.2) !important;
+        color: $vtb-blue !important;
     }
-  }
-  &__code-input-active{
-  border: 1px solid $vtb-blue;
-  }
-  &__code-input-inactive{
-  border: 1px solid $middle-gray;
-  }
-  &__code-btn{
-    width: 115px !important;
-    margin: 0 !important;
-  }
+    &__countdown{
+        width: 240px;
+        font-size: 10px;
+        margin: 5px auto 5px 5px;
+        text-align: center;
+        overflow: hidden;
+        transition: height $transition;
+    }
+    &__countdown-active{
+        height: 13px;
+    }
+    &__countdown-inactive{
+        height: 0px;
+    }
+    &__code-input{
+        display: flex;
+        float: left;
+        width: 115px;
+        height: 30px;
+        font-size: 12px;
+        margin: 0 10px 0 5px;
+        text-align: center;
+        border-radius: 4px;
+        &:focus{
+            outline: none;
+        }
+        &:hover{
+            outline: none;
+        }
+    }
+    &__code-input-success{
+        border: 1px solid $vtb-green;
+        color: $vtb-green;
+    }
+    &__code-input-failed{
+        border: 1px solid $vtb-red;
+        color: $vtb-red;
+    }
+    &__code-input-active{
+        border: 1px solid $vtb-blue;
+    }
+    &__code-input-inactive{
+        border: 1px solid $middle-gray;
+    }
+    &__code-btn{
+        width: 115px !important;
+        margin: 0 !important;
+    }
 }
-

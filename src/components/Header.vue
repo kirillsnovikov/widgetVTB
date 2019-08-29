@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <div class="widget-header__button" @click="hideWidget" :class="{rotate: isRotate}">
+    <div class="widget-header__button" @click="collapseExpandWidget" :class="{rotate: isRotate}">
       <i class="icon-up"></i>
     </div>
   </div>
@@ -34,8 +34,8 @@
       }
     },
     methods: {
-      hideWidget() {
-        this.$emit('hide-widget-main')
+      collapseExpandWidget() {
+        this.$emit('collapse-expand-widget')
         this.isRotate = !this.isRotate
       }
     }
