@@ -3,10 +3,10 @@
     <div>
         <transition name="operation-button" mode="out-in">
             <div
-                :class="getClass"
                 v-if="Object.keys(currentOperation).length !== 0"
-                @click="setOperationIndex(parentOperationIndex)"
-                :key="currentOperation.OperationName">
+                :class="getClass"
+                :key="currentOperation.OperationName"
+                @click="setOperationIndex(parentOperationIndex)">
                 <i class="icon-back"></i>
                 <span>{{currentOperation.OperationName}}</span>
             </div>
@@ -18,19 +18,22 @@
                 @set-operation-index="setOperationIndex"
                 :operation="operation"></OperationButton>
             <Switcher
-                @apply-parameters="applyParameters"
                 v-if="operations.length == 0 && parameters.length != 0"
                 :switchers="parameters"
                 :operation="currentOperation"
-                :key="'switcher'"/>
+                :key="'switcher'"
+                @apply-parameters="applyParameters"/>
             <section
                 v-if="operations.length == 0 && parameters.length == 0"
                 :key="'section_' + currentOperation.CheckType">
                 <div class="check__text">{{currentOperation.OperationText}}</div>
                 <textarea
                     v-if="currentOperation.Comment == true"
-                    class="check__input"
-                    v-model="commentText"></textarea>
+                    v-model="commentText"
+                    :class="getTextareaClass"
+                    :placeholder="currentOperation.HintText"
+                    :readonly="getReadonly"
+                    ></textarea>
                 <component
                     :is="currentOperation.CheckType"
                     :key="currentOperation.CheckType"
@@ -55,7 +58,8 @@
         name: 'OperationLevel',
         data() {
             return {
-                commentText: ''
+                commentText: '',
+                hint: this.currentOperation.HintText
             }
         },
         components: {
@@ -76,14 +80,42 @@
             getClass() {
                 let classes = 'btn btn-back';
                 switch (this.currentOperation.OperationStatus){
-                    case 'success':
-                        classes += ' btn-back__success'; break;
-                    case 'notselected':
-                        classes += ' btn-back__notselected'; break;
-                    case 'failed':
-                        classes += ' btn-back__failed'; break;
+                    case 'success': {
+                        classes += ' btn-back__success';
+                        break;
+                    }
+                    case 'notselected': {
+                        classes += ' btn-back__notselected';
+                        break;
+                    }
+                    case 'failed': {
+                        classes += ' btn-back__failed';
+                        break;
+                    }
                 }
                 return classes;
+            },
+            getReadonly() {
+                return this.currentOperation.OperationStatus != 'notselected';
+            },
+            getTextareaClass() {
+                var myclass = 'check__textarea ';
+
+                switch (this.currentOperation.OperationStatus){
+                    case 'success': {
+                        myclass += 'check__textarea-green';
+                        break;
+                    }
+                    case 'failed': {
+                        myclass += 'check__textarea-red';
+                        break;
+                    }
+                    default: {
+                        myclass += 'check__textarea-blue';
+                    }
+                }
+
+                return myclass;
             }
         },
         methods: {

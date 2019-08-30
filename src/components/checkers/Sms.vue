@@ -101,12 +101,17 @@
                         myclass = 'check-btn-red';
                         break;
                     }
-                    case this.operation.CodeSent: {
-                        myclass = 'check__ok-btn';
+                    case this.operation.CodeCheckInProgress: {
+                        console.log(2);
+                        myclass = 'check-btn-blue-loading'
+                        break;
+                    }
+                    case !this.operation.CodeSent: {
+                        myclass = 'check__inactive-ok';
                         break;
                     }
                     default: {
-                        myclass = 'check__inactive-ok';
+                        myclass = 'check__ok-btn';
                     }
                 }
 
@@ -119,10 +124,14 @@
                 this.$emit('start-sms-countdown', this.operation.Index);
             },
             checkCode() {
-                this.$emit('check-code', this.operation.Index);
+                if (this.operation.OperationStatus == 'notselected' && this.operation.CodeSent && !this.operation.CodeCheckInProgress) {
+                    console.log(1);
+                    this.$emit('check-code', this.operation.Index);
+                }
             }
         },
         updated() {
+            console.log(this.operation.CodeCheckInProgress);
             this.code = this.code.replace(/[^0-9\.]/g, '');
         }
     }

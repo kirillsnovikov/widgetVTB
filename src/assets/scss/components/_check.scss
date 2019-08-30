@@ -94,16 +94,34 @@
         border: 1px solid $vtb-red;
         cursor: default!important;
     }
-    &__input{
+    &-btn-blue-loading{
+        @extend %check-btn;
+        width: 50px;
+        color: $white!important;
+        background: rgba($vtb-blue, 0.5);
+        border: 1px solid $vtb-blue;
+        cursor: default!important;
+    }
+    &__textarea{
         width: 240px;
         height: 80px;
         border-radius: 4px;
-        border: 1px solid $vtb-blue;
         margin: 0 5px 5px 5px;
         resize: vertical;
         &:focus{
             outline: none;
         }
+    }
+    &__textarea-blue{
+        border: 1px solid $vtb-blue;
+    }
+    &__textarea-green{
+        border: 1px solid $vtb-green;
+        cursor: not-allowed;
+    }
+    &__textarea-red{
+        border: 1px solid $vtb-red;
+        cursor: not-allowed;
     }
     &__text{
         display: flex;

@@ -137,6 +137,8 @@ export default {
             });
         },
         checkCode(index) {
+            this.operationsData.Operations[index].CodeCheckInProgress = true;
+
             function callWorkflow() {
                 return new Promise(resolve => {
                     //
@@ -158,6 +160,7 @@ export default {
             }
 
             awaitWorkflow().then(result => {
+                this.operationsData.Operations[index].CodeCheckInProgress = false;
                 if (result.code == '00') {
                     this.operationsData.Operations[index].OperationStatus = 'success';
                 }
