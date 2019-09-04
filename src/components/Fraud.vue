@@ -8,7 +8,9 @@
         <YesNo
             v-if="renderYesNo"
             @report-fraud="reportFraud"/>
-        <div v-if="renderMailLayer" :style="getMailLayerStyle"></div>
+        <div
+            v-if="renderMailLayer"
+            :style="getMailLayerStyle"></div>
     </div>
 </template>
 
