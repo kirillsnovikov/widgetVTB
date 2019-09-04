@@ -76,6 +76,7 @@
                     }
                     case this.operation.CodeSent: {
                         text = 'Введите код';
+                        break;
                     }
                     default: {
                         text = 'Запросите код';
@@ -91,7 +92,7 @@
             },
             getCheckClass() {
                 var myclass;
-
+                //debugger;
                 switch (true){
                     case this.operation.OperationStatus == 'success': {
                         myclass = 'check-btn-green';
@@ -102,11 +103,14 @@
                         break;
                     }
                     case this.operation.CodeCheckInProgress: {
-                        console.log(2);
                         myclass = 'check-btn-blue-loading'
                         break;
                     }
-                    case !this.operation.CodeSent: {
+                    case
+                            this.code == '' ||
+                            this.operation.CodeCheckInProgress ||
+                            !this.operation.CodeSent
+                        : {
                         myclass = 'check__inactive-ok';
                         break;
                     }
@@ -124,14 +128,17 @@
                 this.$emit('start-sms-countdown', this.operation.Index);
             },
             checkCode() {
-                if (this.operation.OperationStatus == 'notselected' && this.operation.CodeSent && !this.operation.CodeCheckInProgress) {
-                    console.log(1);
+                if (
+                        this.operation.OperationStatus == 'notselected' &&
+                        this.operation.CodeSent &&
+                        !this.operation.CodeCheckInProgress &&
+                        this.code != ''
+                    ) {
                     this.$emit('check-code', this.operation.Index);
                 }
             }
         },
         updated() {
-            console.log(this.operation.CodeCheckInProgress);
             this.code = this.code.replace(/[^0-9\.]/g, '');
         }
     }

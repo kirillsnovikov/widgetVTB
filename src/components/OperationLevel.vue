@@ -43,6 +43,7 @@
                     @start-sms-countdown="startSmsCountdown"
                     @check-code="checkCode"></component>
             </section>
+            <Fraud :key="'Fraud'"/>
         </transition-group>
     </div>
 </template>
@@ -53,8 +54,9 @@
     import Sms from '@/components/checkers/Sms'
     import OkButton from '@/components/checkers/OkButton'
     import OperationButton from '@/components/OperationButton'
+    import Fraud from '@/components/Fraud'
 
-  export default {
+    export default {
         name: 'OperationLevel',
         data() {
             return {
@@ -67,7 +69,8 @@
             YesNo,
             Sms,
             OkButton,
-            OperationButton
+            OperationButton,
+            Fraud
         },
         props: {
             operations: Array,
@@ -134,6 +137,7 @@
             checkCode(index) {
                 this.$emit('check-code', index);
             }
-        }
+        },
+        updated() {console.log(this.currentOperation)}
     }
 </script>

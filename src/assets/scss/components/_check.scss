@@ -175,16 +175,19 @@
     &__code-input-success{
         border: 1px solid $vtb-green;
         color: $vtb-green;
+        cursor: not-allowed;
     }
     &__code-input-failed{
         border: 1px solid $vtb-red;
         color: $vtb-red;
+        cursor: not-allowed;
     }
     &__code-input-active{
         border: 1px solid $vtb-blue;
     }
     &__code-input-inactive{
         border: 1px solid $middle-gray;
+        cursor: not-allowed;
     }
     &__code-btn{
         width: 115px !important;

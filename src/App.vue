@@ -44,6 +44,8 @@ export default {
             expanded: true
         };
     },
+    mounted() {
+    },
     methods: {
         setOperationIndex(index) {
             this.operationsData.SelectedOperationIndex = index;
@@ -137,6 +139,7 @@ export default {
             });
         },
         checkCode(index) {
+            console.log('code')
             this.operationsData.Operations[index].CodeCheckInProgress = true;
 
             function callWorkflow() {

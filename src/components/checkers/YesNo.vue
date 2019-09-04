@@ -1,63 +1,81 @@
 <template>
-  <section class="check">
-    <div class="check__yesno-btn">
-      <div :class="getYesClass" @click="applyOperation('success')">Yes</div>
-      <div :class="getNoClass" @click="applyOperation('failed')">No</div>
-    </div>
-  </section>
+    <section class="check">
+        <div class="check__yesno-btn">
+            <div :class="getYesClass" @click="applyOperationReportFraud('success')">Yes</div>
+            <div :class="getNoClass" @click="applyOperationReportFraud('failed')">No</div>
+        </div>
+    </section>
 </template>
 
 <script>
-  export default {
-    name: 'yes-no',
-    props: {
-      operation: Object
-    },
-    computed: {
-      getYesClass(){
-        var myclass;
-        switch (this.operation.OperationStatus) {
-          case 'success': {
-            myclass = 'check__yesno-btn__match_left'
-            break;
-          }
-          case 'notselected': {
-            myclass = 'check__yesno-btn__left';
-            break;
-          }
-          case 'failed': {
-            myclass = 'check__yesno-btn__inactive_left'
-            break;
-          }
-        }
+    export default {
+        name: 'yes-no',
+        props: {
+            operation: Object
+        },
+        computed: {
+            getYesClass(){
+                var myclass;
 
-        return myclass;
-      },
-      getNoClass(){
-        var myclass;
-        switch (this.operation.OperationStatus) {
-          case 'success': {
-            myclass = 'check__yesno-btn__inactive_right'
-            break;
-          }
-          case 'notselected': {
-            myclass = 'check__yesno-btn__right';
-            break;
-          }
-          case 'failed': {
-            myclass = 'check__yesno-btn__match_right'
-            break;
-          }
+                if (this.operation == null) {
+                    myclass = 'check__yesno-btn__left';
+                }
+                else switch (this.operation.OperationStatus) {
+                    case 'success': {
+                        myclass = 'check__yesno-btn__match_left'
+                        break;
+                    }
+                    case 'notselected': {
+                        myclass = 'check__yesno-btn__left';
+                        break;
+                    }
+                    case 'failed': {
+                        myclass = 'check__yesno-btn__inactive_left'
+                        break;
+                    }
+                }
+
+                return myclass;
+            },
+            getNoClass(){
+                var myclass;
+
+                if (this.operation == null) {
+                    myclass = 'check__yesno-btn__right';
+                }
+                else switch (this.operation.OperationStatus) {
+                    case 'success': {
+                        myclass = 'check__yesno-btn__inactive_right'
+                        break;
+                    }
+                    case 'notselected': {
+                        myclass = 'check__yesno-btn__right';
+                        break;
+                    }
+                    case 'failed': {
+                        myclass = 'check__yesno-btn__match_right'
+                        break;
+                    }
+                }
+
+                return myclass;
+            }
+        },
+        methods: {
+            applyOperationReportFraud(newStatus) {
+                if (this.operation == null) {
+                    console.log('YesNo', newStatus);
+                    this.$emit('report-fraud', newStatus);
+                }
+                else {
+                    if (
+                        !(this.operation.Comment == true && this.commentText == '') &&
+                        this.operation.OperationStatus == 'notselected'
+                    ) {
+                        this.$emit('apply-operation', this.operation.Index, this.commentText, newStatus);
+                    }
+                }
+            }
         }
-        return myclass;
-      }
-    },
-    methods: {
-      applyOperation(newStatus) {
-        if (!(this.operation.Comment == true && this.commentText == '') && this.operation.OperationStatus == 'notselected') {
-          this.$emit('apply-operation', this.operation.Index, this.commentText, newStatus);
-        }
-      }
     }
-  }
 </script>
