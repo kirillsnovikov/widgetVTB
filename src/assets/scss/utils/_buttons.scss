@@ -14,8 +14,7 @@
     color: $white;
     background: $check-btn-blue-color;
     border: 1px solid $check-btn-blue-color;
-    transition: background-color $transition;
-    transition: color $transition;
+    transition: $transition all;
     &:hover {
         background: rgba($check-btn-blue-color, 0.8);
     }

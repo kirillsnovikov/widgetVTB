@@ -27,8 +27,7 @@
             @extend %yes-no-btn;
             border-top-right-radius: 0 !important;
             border-bottom-right-radius: 0 !important;
-            transition: background-color $transition;
-            transition: color $transition;
+            transition: $transition all;
             &:hover {
                 background-color: rgba($yes-button-color, 0.4);
             }
@@ -58,8 +57,7 @@
             border-top-left-radius: 0 !important;
             border-bottom-left-radius: 0 !important;
             border-left: none !important;
-            transition: background-color $transition;
-            transition: color $transition;
+            transition: $transition all;
             &:hover {
                 background-color: rgba($no-button-color, 0.2);
             }
@@ -110,6 +108,20 @@
         resize: vertical;
         &:focus{
             outline: none;
+        }
+        &::-webkit-scrollbar{
+            width: 10px;
+        }
+        &::-webkit-scrollbar-track{
+            background-color: transparent;
+        }
+        &::-webkit-scrollbar-thumb{
+            border-radius: 5px;
+            background-color: rgba($scrollbar-color, 0.3);
+            transition: background-color $transition;
+        }
+        &::-webkit-scrollbar-thumb:hover{
+            background-color: rgba($scrollbar-color, 0.6);
         }
     }
     &__textarea-blue{

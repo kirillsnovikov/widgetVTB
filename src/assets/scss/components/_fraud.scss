@@ -1,0 +1,80 @@
+.fraud_layer{
+    @extend %flex-column;
+    width: 265px;
+    background-color: $white;
+    font-size: 13px;
+}
+
+.fraud_cross{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-end;
+    width: 265px;
+    height: 0px;
+    font-size: 25px;
+}
+
+.fraud_cross > div {
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.fraud_cross > div > i{
+    color: rgba($vtb-blue, 0.6);
+    transition: color $transition;
+}
+
+.fraud_cross > div > i:hover{
+    color: $vtb-blue;
+}
+
+.fraud_text{
+    width: 250px;
+    padding: 5px 0;
+}
+
+.fraud_h{
+    width: 255px;
+    padding: 5px;
+    font-weight: bold;
+    color: $vtb-blue;
+}
+
+.fraud_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    padding: 5px;
+    width: 100px;
+    margin: 5px auto;
+    border: 1px solid $vtb-blue;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+    transition: $transition all;
+}
+
+.fraud_button:active{
+    color: $vtb-blue;
+}
+
+.fraud_button_active{
+    background-color: $vtb-blue;
+}
+
+.fraud_button_active:active{
+    background-color: white;
+}
+
+.fraud_button_inactive{
+    background-color: rgba($vtb-blue, 0.6);
+    cursor: default;
+}

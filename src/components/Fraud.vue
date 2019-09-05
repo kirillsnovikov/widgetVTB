@@ -1,62 +1,96 @@
 <template>
-    <div style="margin-top: 20px;">
+    <div>
         <div
-            v-if="renderSuspectionButton"
+            v-if="renderSuspicionButton"
             class="check__sms-btn-active"
-            @click="status = 'suspection'"
+            @click="setFraudStatus('suspicion')"
             >Подозрение на мошенничество</div>
         <YesNo
             v-if="renderYesNo"
             @report-fraud="reportFraud"/>
         <div
             v-if="renderMailLayer"
-            :style="getMailLayerStyle"></div>
+            class="fraud_layer"
+            :style="getMailLayerStyle">
+            <div class="fraud_cross">
+                <div @click="setFraudStatus('ok')"><i class="icon-remove"></i></div>
+            </div>
+            <div
+                class="fraud_text">Уточните информацию о предположительном злоумышленнике. Информация будет направлена в службу безопасности</div>
+            <div
+                class="fraud_h">Суть обращения</div>
+            <textarea
+                class="check__textarea check__textarea-blue"
+                v-model="requestText"></textarea>
+            <div
+                class="fraud_h">Что именно вызвало подозрение, что звонит не клиент?</div>
+            <textarea
+                class="check__textarea check__textarea-blue"
+                v-model="suspicionText"></textarea>
+            <div
+                class="fraud_h">Произведена ли блокировка продуктов клиента?</div>
+            <textarea
+                class="check__textarea check__textarea-blue"
+                v-model="blockedText"></textarea>
+            <div
+                :class="getBtnClass"
+                @click="sendFraudMail">Отправить</div>
+            <div
+                v-if="fraudStatus == 'sending'"
+                class="fraud_text"
+                style="text-align: center; opacity: 0.6; font-size: 11px; padding-left: 15px">Идёт отправка письма</div>
+        </div>
     </div>
 </template>
 
 <script>
     import YesNo from '@/components/checkers/YesNo'
-import { ok } from 'assert';
 
     export default {
         name: 'Fraud',
         data() {
             return {
-                // ok
-                // suspection
-                // confirmed
-                // sent
-                status: 'ok'
+                requestText: '',
+                suspicionText: '',
+                blockedText: ''
             }
+        },
+        props: {
+            fraudStatus: String
         },
         components: {YesNo},
         computed: {
             getMailLayerStyle() {
                 return {
-                    width: '265px',
-                    height: '380px',
-                    position: 'absolute',
                     top: document.getElementsByClassName('widget-header')[0].offsetHeight + 20 + 'px',
-                    'background-color': 'rgba(0, 200, 0, 0.5)'
                 }
             },
-            renderSuspectionButton() {
-                return this.status == 'ok' || this.status == 'suspection'
+            renderSuspicionButton() {
+                return this.fraudStatus == 'ok' || this.fraudStatus == 'suspicion'
             },
             renderYesNo() {
-                return this.status == 'suspection'
+                return this.fraudStatus == 'suspicion'
             },
             renderMailLayer() {
-                return this.status == 'confirmed'
+                return this.fraudStatus == 'confirmed' || this.fraudStatus == 'sending'
+            },
+            getBtnClass() {
+                return 'fraud_button ' + (this.fraudStatus == 'sending' ? 'fraud_button_inactive' : 'fraud_button_active')
             }
         },
         methods: {
             reportFraud(reported) {
-                console.log('Fraud', reported)
                 if (reported == 'success') {
-                    this.status = 'confirmed'
+                    this.setFraudStatus('confirmed')
                 }
-                else this.status = 'ok'
+                else this.setFraudStatus('ok')
+            },
+            setFraudStatus(newStatus) {
+                this.$emit('set-fraud-status', newStatus);
+            },
+            sendFraudMail() {
+                if (this.fraudStatus == 'confirmed')
+                    this.$emit('send-fraud-mail', this.requestText, this.suspicionText, this.blockedText)
             }
         }
     }

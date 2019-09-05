@@ -14,11 +14,14 @@
             :currentOperation="getCurrentOperation"
             :parameters="getParameters"
             :parentOperationIndex="getParentOperationIndex"
+            :fraudStatus="this.operationsData.FraudStatus"
             @set-operation-index="setOperationIndex"
             @apply-parameters="applyParameters"
             @apply-operation="applyOperation"
             @start-sms-countdown="startSmsCountdown"
             @check-code="checkCode"
+            @set-fraud-status="setFraudStatus"
+            @send-fraud-mail="sendFraudMail"
             />
         </div>
     </transition>
@@ -44,7 +47,44 @@ export default {
             expanded: true
         };
     },
-    mounted() {
+    computed: {
+        getCurrentOperations() {
+            let result = this.operationsData.Operations.filter(operation => {
+                return (operation.ParentOperationIndex === this.operationsData.SelectedOperationIndex);
+            });
+            return result;
+        },
+        getCurrentOperation() {
+            let result;
+
+            if (this.operationsData.SelectedOperationIndex !== null) {
+                result = this.operationsData.Operations[this.operationsData.SelectedOperationIndex];
+            }
+            else {
+                result = {};
+            }
+
+            return result;
+        },
+        getParentOperationIndex() {
+            let parentOperation = this.operationsData.Operations.find(operation => {
+                return operation.Index === this.operationsData.SelectedOperationIndex;
+            });
+
+            if (parentOperation) {
+                return parentOperation.ParentOperationIndex;
+            }
+            else {
+                return null;
+            }
+        },
+        getParameters() {
+            if (Object.keys(this.getCurrentOperation).length !== 0) {
+                return this.getCurrentOperation.ParametersIndexes.map(parameterIndex => {
+                    return this.operationsData.Parameters[parameterIndex];
+                });
+            }
+        }
     },
     methods: {
         setOperationIndex(index) {
@@ -133,7 +173,8 @@ export default {
             }, 1000);
 
             awaitWorkflow().then(result => {
-                if (result.code == "00") {
+                console.log(123)
+                if (result.code == '00') {
                     this.operationsData.Operations[index].CodeSent = true;
                 }
             });
@@ -168,45 +209,38 @@ export default {
                     this.operationsData.Operations[index].OperationStatus = 'success';
                 }
             })
-        }
-    },
-    computed: {
-        getCurrentOperations() {
-            let result = this.operationsData.Operations.filter(operation => {
-                return (operation.ParentOperationIndex === this.operationsData.SelectedOperationIndex);
-            });
-            return result;
         },
-        getCurrentOperation() {
-            let result;
-
-            if (this.operationsData.SelectedOperationIndex !== null) {
-                result = this.operationsData.Operations[this.operationsData.SelectedOperationIndex];
-            }
-            else {
-                result = {};
-            }
-
-            return result;
+        setFraudStatus(newStatus){
+            this.operationsData.FraudStatus = newStatus;
         },
-        getParentOperationIndex() {
-            let parentOperation = this.operationsData.Operations.find(operation => {
-                return operation.Index === this.operationsData.SelectedOperationIndex;
-            });
+        sendFraudMail(requestText, suspicionText, blockedText) {
+            this.operationsData.FraudStatus = 'sending';
 
-            if (parentOperation) {
-                return parentOperation.ParentOperationIndex;
-            }
-            else {
-                return null;
-            }
-        },
-        getParameters() {
-            if (Object.keys(this.getCurrentOperation).length !== 0) {
-                return this.getCurrentOperation.ParametersIndexes.map(parameterIndex => {
-                    return this.operationsData.Parameters[parameterIndex];
+            function callWorkflow() {
+                return new Promise(resolve => {
+                    //
+                    ////
+                    setTimeout(() => {
+                        resolve(true);
+                    }, 4000);
+                    ////
+                    //
                 });
             }
+
+            async function awaitWorkflow() {
+                const bool = await callWorkflow();
+                return {
+                    code: bool ? "00" : "01",
+                    text: "tttttt"
+                };
+            }
+
+            awaitWorkflow().then(result => {
+                if (result.code == '00') {
+                    this.operationsData.FraudStatus = 'ok';
+                }
+            });
         }
     }
 };

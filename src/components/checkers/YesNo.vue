@@ -64,7 +64,6 @@
         methods: {
             applyOperationReportFraud(newStatus) {
                 if (this.operation == null) {
-                    console.log('YesNo', newStatus);
                     this.$emit('report-fraud', newStatus);
                 }
                 else {

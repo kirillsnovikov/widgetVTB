@@ -1,7 +1,7 @@
 <template>
   <!-- <div class="widget-main-operations"> -->
     <div>
-        <transition name="operation-button" mode="out-in">
+        <transition v-if="fraudIsOkOrSuspicion" name="operation-button" mode="out-in">
             <div
                 v-if="Object.keys(currentOperation).length !== 0"
                 :class="getClass"
@@ -11,7 +11,7 @@
                 <span>{{currentOperation.OperationName}}</span>
             </div>
         </transition>
-        <transition-group name="operation-button" mode="out-in">
+        <transition-group v-if="fraudIsOkOrSuspicion" name="operation-button" mode="out-in">
             <OperationButton
                 v-for="operation in operations"
                 :key="operation.OperationName"
@@ -43,8 +43,15 @@
                     @start-sms-countdown="startSmsCountdown"
                     @check-code="checkCode"></component>
             </section>
-            <Fraud :key="'Fraud'"/>
         </transition-group>
+        <transition name="operation-button" mode="out-in">
+            <Fraud
+                v-if="Object.keys(currentOperation).length == 0"
+                :key="'Fraud'"
+                :fraudStatus="fraudStatus"
+                @set-fraud-status="setFraudStatus"
+                @send-fraud-mail="sendFraudMail"/>
+        </transition>
     </div>
 </template>
 
@@ -78,6 +85,7 @@
             currentOperation: Object,
             parameters: Array,
             parentOperationIndex: Number,
+            fraudStatus: String
         },
         computed: {
             getClass() {
@@ -119,6 +127,9 @@
                 }
 
                 return myclass;
+            },
+            fraudIsOkOrSuspicion() {
+                return this.fraudStatus == 'ok' || this.fraudStatus == 'suspicion'
             }
         },
         methods: {
@@ -136,8 +147,13 @@
             },
             checkCode(index) {
                 this.$emit('check-code', index);
+            },
+            setFraudStatus(newStatus) {
+                this.$emit('set-fraud-status', newStatus);
+            },
+            sendFraudMail(requestText, suspicionText, blockedText) {
+                this.$emit('send-fraud-mail', requestText, suspicionText, blockedText)
             }
-        },
-        updated() {console.log(this.currentOperation)}
+        }
     }
 </script>
