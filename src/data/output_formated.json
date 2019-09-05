@@ -1,6 +1,7 @@
 {
   "clientName": "Иван Петрович",
   "SelectedOperationIndex": null,
+  "FraudStatus": "ok",
   "Operations": [
     {
       "Index": 0,
@@ -45,7 +46,8 @@
       "CheckType": "Sms",
       "Seconds": 15,
       "Interval": null,
-      "CodeSent": false
+      "CodeSent": false,
+      "CodeCheckInProgress": false
     },
     {
       "Index": 3,
