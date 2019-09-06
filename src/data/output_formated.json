@@ -2,6 +2,29 @@
   "clientName": "Иван Петрович",
   "SelectedOperationIndex": null,
   "FraudStatus": "ok",
+  "ShowingStatusPriority": null,
+  "ProcessStatuses": [
+    {
+        "Priority": 1,
+        "Text": "Установлен запрет на обслуживание клиента. Дата и время снятия запрета: "
+    },
+    {
+        "Priority": 2,
+        "Text": "Аутентификация не проводилась."
+    },
+    {
+      "Priority": 3,
+      "Text": "Аутентификация пройдена по части рисковых операций. Перед выполнение операции проверьте полноту запрошенных параметров."
+    },
+    {
+      "Priority": 4,
+      "Text": "Аутентификация пройдена по нерисковым. Выполнение других операций запрещено."
+    },
+    {
+      "Priority": 5,
+      "Text": "Аутентификация пройдена по блокировке продуктов. Выполнение других операций запрещено."
+    }
+  ],
   "Operations": [
     {
       "Index": 0,
@@ -30,7 +53,8 @@
         0,
         1
       ],
-      "CheckType": "YesNo"
+      "CheckType": "YesNo",
+      "ProcessStatusPriority" : 4
     },
     {
       "Index": 2,
@@ -47,7 +71,8 @@
       "Seconds": 15,
       "Interval": null,
       "CodeSent": false,
-      "CodeCheckInProgress": false
+      "CodeCheckInProgress": false,
+      "ProcessStatusPriority" : 3
     },
     {
       "Index": 3,
