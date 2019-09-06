@@ -1,43 +1,53 @@
 <template>
-  <div class="header-layout">
-    <div class="widget-header__main">
-      <div class="widget-header__main__title">{{ClientName}}</div>
-      <div class="widget-header__main__status">
-        <div class="widget-header__main__status__number success">
-          <i class="icon-check"></i>
-          <span>Клиент звонит с доверенного номера</span>
+    <div class="header-layout">
+        <div class="widget-header__main">
+            <div class="widget-header__main__title">{{ClientName}}</div>
+            <div class="widget-header__main__status">
+                <div class="widget-header__main__status__number success">
+                    <i class="icon-check"></i>
+                    <span>Клиент звонит с доверенного номера</span>
+                </div>
+                <div
+                    v-if="this.processStatus"
+                    :class="'widget-header__main__status__operation ' +  (getStatusIsDanger ? 'danger' : 'success')">
+                    <i v-if="getStatusIsDanger" class="icon-remove"></i>
+                    <i v-if="!getStatusIsDanger" class="icon-check"></i>
+                    <span>{{this.processStatus.Text}}</span>
+                </div>
+            </div>
         </div>
-        <div class="widget-header__main__status__operation danger">
-          <i class="icon-remove"></i>
-          <span>Аутентификация не проводилась</span>
+        <div class="widget-header__button" @click="collapseExpandWidget" :class="{rotate: expanded}">
+            <i class="icon-up"></i>
         </div>
-      </div>
     </div>
-    <div class="widget-header__button" @click="collapseExpandWidget" :class="{rotate: isRotate}">
-      <i class="icon-up"></i>
-    </div>
-  </div>
 </template>
 
 <script>
-  export default {
-    name: 'Header',
+export default {
+    name: "Header",
     props: {
-      ClientName: {
-        type: String,
-        default: 'Неизвестный абонент'
-      }
+        expanded: Boolean,
+        ClientName: {
+            type: String,
+            default: "Неизвестный абонент"
+        },
+        processStatus: Object
     },
     data() {
-      return {
-        isRotate: false,
-      }
+        return {
+            isRotate: false
+        };
+    },
+    computed: {
+        getStatusIsDanger() {
+            return [1, 2].includes(this.processStatus.Priority)
+        }
     },
     methods: {
-      collapseExpandWidget() {
-        this.$emit('collapse-expand-widget')
-        this.isRotate = !this.isRotate
-      }
+        collapseExpandWidget() {
+            this.$emit("collapse-expand-widget");
+            //this.isRotate = !this.isRotate;
+        }
     }
-  }
+};
 </script>

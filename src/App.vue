@@ -3,7 +3,9 @@
     <div class="widget-header">
         <Header
             :ClientName="operationsData.ClientName"
-            v-on:collapse-expand-widget="expanded = !expanded"
+            :processStatus="getProcessStatusText"
+            :expanded="expanded"
+            @collapse-expand-widget="expanded = !expanded"
         />
     </div>
     <transition name="show-widget">
@@ -48,6 +50,9 @@ export default {
         };
     },
     computed: {
+        getProcessStatusText() {
+            return this.operationsData.ProcessStatuses.find(st => st.Priority == this.operationsData.ShowingStatusPriority)
+        },
         getCurrentOperations() {
             let result = this.operationsData.Operations.filter(operation => {
                 return (operation.ParentOperationIndex === this.operationsData.SelectedOperationIndex);
@@ -129,12 +134,24 @@ export default {
                 else {
                     lockThisParameters(this);
                     this.operationsData.Operations[id].OperationStatus = "success";
+                    this.setNewProcessStatus(this, id)
+                    // if (this.operationsData.Operations[id].ProcessStatusPriority != null) {
+                    //     if (this.operationsData.ShowingStatusPriority) {
+                    //         if (this.operationsData.Operations[id].ProcessStatusPriority < this.operationsData.ShowingStatusPriority)
+                    //             this.operationsData.ShowingStatusPriority = this.operationsData.Operations[id].ProcessStatusPriority;
+                    //     }
+                    //     else
+                    //         this.operationsData.ShowingStatusPriority = this.operationsData.Operations[id].ProcessStatusPriority;
+                    // }
                 }
             }
         },
         applyOperation(index, text, newstatus) {
             this.operationsData.Operations[index].CommentText = text;
             this.operationsData.Operations[index].OperationStatus = newstatus;
+
+            if (newstatus == 'success')
+                this.setNewProcessStatus(this, index)
         },
         startSmsCountdown(index) {
             function stopCountdown(ths) {
@@ -207,6 +224,8 @@ export default {
                 this.operationsData.Operations[index].CodeCheckInProgress = false;
                 if (result.code == '00') {
                     this.operationsData.Operations[index].OperationStatus = 'success';
+
+                    this.setNewProcessStatus(this, index)
                 }
             })
         },
@@ -241,6 +260,19 @@ export default {
                     this.operationsData.FraudStatus = 'ok';
                 }
             });
+        },
+        setNewProcessStatus(ths, id) {
+            console.log('old: ' + ths.operationsData.ShowingStatusPriority);
+            console.log('new: ' + ths.operationsData.Operations[id].ProcessStatusPriority);
+            console.log('new < old : ' + ths.operationsData.Operations[id].ProcessStatusPriority < ths.operationsData.ShowingStatusPriority);
+            if (ths.operationsData.Operations[id].ProcessStatusPriority != null) {
+                if (ths.operationsData.ShowingStatusPriority) {
+                    if (ths.operationsData.Operations[id].ProcessStatusPriority < ths.operationsData.ShowingStatusPriority)
+                        ths.operationsData.ShowingStatusPriority = ths.operationsData.Operations[id].ProcessStatusPriority;
+                }
+                else
+                    ths.operationsData.ShowingStatusPriority = ths.operationsData.Operations[id].ProcessStatusPriority;
+            }
         }
     }
 };

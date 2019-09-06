@@ -1,6 +1,6 @@
 .widget-header {
-  height: $header-height;
-  overflow: hidden;
+  /*height: $header-height;
+  overflow: hidden;*/
   .header-layout {
     @extend %flex-center-between;
     // justify-content: space-between;
@@ -8,8 +8,8 @@
   }
   &__main {
     width: 235px;
-    height: 50px;
-    overflow: hidden;
+    /*height: 50px;
+    overflow: hidden;*/
     @extend %flex-column;
     &__title {
       height: 17px;
@@ -20,12 +20,12 @@
     &__status {
       font-size: 12px;
       &__number {
-        height: 15px;
-        overflow: hidden;
+        // height: 15px;
+        // overflow: hidden;
       }
       &__operation {
-        height: 15px;
-        overflow: hidden;
+        // height: 15px;
+        // overflow: hidden;
       }
     }
   }
