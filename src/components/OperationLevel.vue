@@ -145,8 +145,8 @@
             startSmsCountdown(index) {
                 this.$emit('start-sms-countdown', index);
             },
-            checkCode(index) {
-                this.$emit('check-code', index);
+            checkCode(index, code) {
+                this.$emit('check-code', index, code);
             },
             setFraudStatus(newStatus) {
                 this.$emit('set-fraud-status', newStatus);

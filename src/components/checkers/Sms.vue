@@ -134,7 +134,7 @@
                         !this.operation.CodeCheckInProgress &&
                         this.code != ''
                     ) {
-                    this.$emit('check-code', this.operation.Index);
+                    this.$emit('check-code', this.operation.Index, this.code);
                 }
             }
         },

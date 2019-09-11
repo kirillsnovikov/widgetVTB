@@ -177,6 +177,7 @@
         margin: 0 10px 0 5px;
         text-align: center;
         border-radius: 4px;
+        transition: border, background-color $transition;
         &:focus{
             outline: none;
         }
@@ -199,6 +200,7 @@
     }
     &__code-input-inactive{
         border: 1px solid $middle-gray;
+        background-color: rgba($middle-gray, 0.2);
         cursor: not-allowed;
     }
     &__code-btn{

@@ -1,5 +1,5 @@
 <template>
-    <div class="header-layout">
+    <div @mousedown="mouseDownHeader(e)" class="header-layout">
         <div class="widget-header__main">
             <div class="widget-header__main__title">{{ClientName}}</div>
             <div class="widget-header__main__status">
@@ -16,7 +16,12 @@
                 </div>
             </div>
         </div>
-        <div class="widget-header__button" @click="collapseExpandWidget" :class="{rotate: expanded}">
+        <div
+            class="widget-header__button"
+            @click="collapseExpandWidget"
+            @mouseenter="mouseEnterButton"
+            @mouseleave="mouseLeaveButton"
+            :class="{rotate: expanded}">
             <i class="icon-up"></i>
         </div>
     </div>
@@ -47,6 +52,15 @@ export default {
         collapseExpandWidget() {
             this.$emit("collapse-expand-widget");
             //this.isRotate = !this.isRotate;
+        },
+        mouseDownHeader(e) {
+            this.$emit("mouse-down-header", e);
+        },
+        mouseEnterButton() {
+            this.$emit("mouse-enter-button");
+        },
+        mouseLeaveButton() {
+            this.$emit("mouse-leave-button");
         }
     }
 };
