@@ -58,14 +58,6 @@
 
         // this.switcher.Editable = false
     },
-    methods: {
-      // changeStatus() {
-      //   console.log(this.switcher.ParameterStatus)
-      //   if (this.change) {
-      //     console.log('kkkk')
-      //   }
-      // }
-    },
     computed: {
       getClass() {
         return {

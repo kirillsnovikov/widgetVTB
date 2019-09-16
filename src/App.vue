@@ -3,6 +3,7 @@
     <div class="widget-header">
         <Header
             :ClientName="operationsData.ClientName"
+            :notificationNumberFlg="operationsData.notificationNumberFlg"
             :processStatus="getProcessStatusText"
             :expanded="expanded"
             @collapse-expand-widget="expanded = !expanded"
@@ -17,7 +18,8 @@
             :currentOperation="getCurrentOperation"
             :parameters="getParameters"
             :parentOperationIndex="getParentOperationIndex"
-            :fraudStatus="this.operationsData.FraudStatus"
+            :fraudStatus="operationsData.FraudStatus"
+            :appName="operationsData.applicationName"
             @set-operation-index="setOperationIndex"
             @apply-parameters="applyParameters"
             @apply-operation="applyOperation"
@@ -66,9 +68,8 @@ export default {
         };
     },
     watch: {
-        'operationsData': (oldV, newV) => {
-            console.log('watching operationsData');
-            this.stompClient.send('/v1/auth/put/' + this.sid + '/' + this.operatorSessionId, {}, JSON.stringify(this.operationsData))
+        operationsData: function(oldV, newV) {
+            this.stompClient.send('/v1/auth/put/' + this.sid + '/' + this.operatorSessionId, {}, JSON.stringify(this.operationsData));
         }
     },
     computed: {
@@ -167,7 +168,7 @@ export default {
 
                 //если найден хотя бы один незаполненный обязательный параметр
                 if (stopperFound) {
-                    console.log("Надо бы показать пользаку, что он невнимательный");
+                    //
                 }
                 else {
                     lockThisParameters(this);
@@ -316,9 +317,6 @@ export default {
             });
         },
         setNewProcessStatus(ths, id) {
-            console.log('old: ' + ths.operationsData.ShowingStatusPriority);
-            console.log('new: ' + ths.operationsData.Operations[id].ProcessStatusPriority);
-            console.log('new < old : ' + ths.operationsData.Operations[id].ProcessStatusPriority < ths.operationsData.ShowingStatusPriority);
             if (ths.operationsData.Operations[id].ProcessStatusPriority != null) {
                 if (ths.operationsData.ShowingStatusPriority) {
                     if (ths.operationsData.Operations[id].ProcessStatusPriority < ths.operationsData.ShowingStatusPriority)
@@ -399,7 +397,9 @@ export default {
                     Priority: 2,
                     Text: 'Аутентификация не проводилась.'
                 }
-            ]
+            ],
+            notificationNumberFlg: null,
+            applicationName: null
         }
 
         function callWorkflow() {
@@ -476,47 +476,53 @@ export default {
                         }
                     }
 
+                    //функция обработки параметра
+                    function processParameter(aap) {
+                        //получаем индекс такой же операции в массиве операций в слепке состояния
+                        var CurrParInd = OpsParsStates.Parameters.map(function (el) {
+                            return el.ParameterName;
+                        }).indexOf(aap['Parameter Name']);
+
+                        //если такого параметра ещё нет, то создаём его
+                        if (CurrParInd == -1) {
+                            //создаём новый параметр
+                            var NewPar = {
+                                Index: OpsParsStates.Parameters.length,
+                                ParameterName: aap['Parameter Name'],
+                                //success, notselected, failed
+                                ParameterStatus: 'notselected',
+                                Editable: true
+                            };
+
+                            //флаг доверенного номера
+                            NewPar.AvalibleWithTrustedNumber = aap['Trusted Number Flg'] == 'Y';
+
+                            //флаг недоверенного номера
+                            NewPar.AvalibleWithUntrustedNumber = aap['Untrusted Number Flg'] == 'Y';
+
+                            //флаг "не обязательно"
+                            NewPar.Required = aap['Optional Flg'] != 'Y';
+
+                            //записываем новый параметр в массив параметров
+                            OpsParsStates.Parameters.push(NewPar);
+
+                            //записываем индекс нового параметра в массив параметров новой операции
+                            NewOp.ParametersIndexes.push(OpsParsStates.Parameters.length - 1)
+                        } else {
+                            //записываем индекс имеющегося параметра в массив параметров новой операции
+                            NewOp.ParametersIndexes.push(CurrParInd);
+                        }
+                    }
+
                     //обрабатываем список параметров
                     var laap = op['ListOfVTB24 Auth Administration - Parameters'];
-                    if (Object.keys(laap).length != 0) {
-                        //обрабатываем каждый параметр
-                        for (var aap of laap["VTB24 Auth Administration - Parameters"]) {
-                            //получаем индекс такой же операции в массиве операций в слепке состояния
-                            var CurrParInd = OpsParsStates.Parameters.map(function (el) {
-                                return el.ParameterName;
-                            }).indexOf(aap['Parameter Name']);
-
-                            //если такого параметра ещё нет, то создаём его
-                            if (CurrParInd == -1) {
-                                //создаём новый параметр
-                                var NewPar = {
-                                    Index: OpsParsStates.Parameters.length,
-                                    ParameterName: aap['Parameter Name'],
-                                    //success, notselected, failed
-                                    ParameterStatus: 'notselected',
-                                    Editable: true
-                                };
-
-                                //флаг доверенного номера
-                                NewPar.AvalibleWithTrustedNumber = aap['Trusted Number Flg'] == 'Y';
-
-                                //флаг недоверенного номера
-                                NewPar.AvalibleWithUntrustedNumber = aap['Untrusted Number Flg'] == 'Y';
-
-                                //флаг "не обязательно"
-                                NewPar.Required = aap['Optional Flg'] != 'Y';
-
-                                //записываем новый параметр в массив параметров
-                                OpsParsStates.Parameters.push(NewPar);
-
-                                //записываем индекс нового параметра в массив параметров новой операции
-                                NewOp.ParametersIndexes.push(OpsParsStates.Parameters.length - 1)
-                            } else {
-                                //записываем индекс имеющегося параметра в массив параметров новой операции
-                                NewOp.ParametersIndexes.push(CurrParInd);
-                            }
-                        }//конец (var aap in laap)
-                    } //конец else от if (Object.keys(laap).length == 0)
+                    if (typeof laap["VTB24 Auth Administration - Parameters"] == 'undefined') {
+                        if (Object.keys(laap).length != 0) processParameter(laap);
+                    }
+                    else {
+                        for (var aap of laap["VTB24 Auth Administration - Parameters"])
+                            processParameter(aap);
+                    }
 
                     //добавляю новую операцию в массив операций объекта слепка
                     OpsParsStates.Operations.push(NewOp);
@@ -546,44 +552,92 @@ export default {
                 op = OpsParsStates.Operations.find(operation => operation.OperationName == 'Блокировка продукта')
                 if(op) op.ProcessStatusPriority = 5;
 
-        //-------------------------------------
-        self.defaultDataTemplate = Object.assign({}, OpsParsStates);
+                //-------------------------------------
+                //-------------------------------------
+                //-------------------------------------
+                //-------------------------------------
+                //-------------------------------------
+                self.defaultDataTemplate = Object.assign({}, OpsParsStates);
 
-        //создаём сокет, стомп клиент и вытягиваем Id сессии
-        var socket = new sockjs(SiebelAppFacade.VTB24ProcessHelper.lookupValue('VTB_BIOMETRICS_CONFIG', 'BiometryWidgetBackendURL'));
-        self.stompClient = Stomp.over(socket);
-        self.operatorSessionId = SiebelApp.S_App.GetProfileAttr('VTB24SessionId');
+                //создаём сокет, стомп клиент и вытягиваем Id сессии
+                var socket = new sockjs(SiebelAppFacade.VTB24ProcessHelper.lookupValue('VTB_BIOMETRICS_CONFIG', 'BiometryWidgetBackendURL'));
+                self.stompClient = Stomp.over(socket);
+                self.operatorSessionId = SiebelApp.S_App.GetProfileAttr('VTB24SessionId');
 
-        //подключаемся
-        self.stompClient.connect({}, function(frame) {
-            console.log('Call session connected (Client Authentication): ' + frame);
+                //подключаемся
+                self.stompClient.connect({}, function(frame) {
+                    console.log('Call session connected (Client Authentication): ' + frame);
 
-            //подписываемся на ошибки аутентификации в рамках сессии в зибеле
-            self.stompClient.subscribe('/topic/auth/error/' + self.operatorSessionId, function(messageOutput) {
-                console.log(messageOutput);
-            })
+                    //подписываемся на ошибки аутентификации в рамках сессии в зибеле
+                    self.stompClient.subscribe('/topic/auth/error/' + self.operatorSessionId, function(errorOutput) {
+                        console.log('Call session error', errorOutput);
+                    })
 
-            //подписываемся на получение actionId/sid
-            self.stompClient.subscribe('/topic/embp_biometrics/sid' + self.operatorSessionId, function(messageOutput) {
-                self.sid = messageOutput.body;
-                console.log('ActionId (Client Authentication): ' + self.sid);
+                    //подписываемся на получение actionId/sid
+                    self.stompClient.subscribe('/topic/embp_biometrics/sid/' + self.operatorSessionId, function(sidOutput) {
+                        self.sid = sidOutput.body;
+                        console.log('ActionId (Client Authentication): ' + self.sid);
 
-                //подписываюсь на получение Snapshot
-                self.stompClient.subscribe('/topic/auth/' + self.sid + '/' + self.operatorSessionId, function(messageOutput) {
-                    if (messageOutput.body == '') {
-                        self.operationsData = Object.assign({}, self.defaultDataTemplate);
-                    }
-                    else
-                        self.operationsData = JSON.parse(messageOutput.body);
-                }, self.stompHeader_Snapshot)
+                        //подписываюсь на окончание зваонка
+                        self.stompClient.subscribe('/topic/auth/close/' + self.sid + '/' + operatorSessionId, function(closeOutput){
+                            console.log('Call session close', closeOutput);
+                            self.operationsData = null;
+                        })
 
-                self.stompClient.send('/v1/auth/get/' + self.sid + '/' + self.operatorSessionId)
-            })
-        })
-        //-------------------------------------
+                        //подписываюсь на получение Snapshot
+                        self.stompClient.subscribe('/topic/auth/' + self.sid + '/' + self.operatorSessionId, function(snapshotOutput) {
+                            console.log('Snapshot', snapshotOutput);
+
+                            if (snapshotOutput.body == 'NEW_SESSION') {
+                                //запрашиваю информацию о звонке
+                                self.stompClient.send('/v1/auth/sessionInfo/' + self.sid + '/' + operatorSessionId)
+                            }
+                            else
+                                self.operationsData = JSON.parse(snapshotOutput.body);
+                        }, self.stompHeader_Snapshot)
+
+                        //подписываюсь на получение информации о звонке
+                        self.stompClient.subscribe('/topic/auth/sessionInfo/' + self.sid + '/' + operatorSessionId, function(infoOutput){
+                            let CallInfo = JSON.parse(infoOutput.body);
+
+                            self.operationsData = Object.assign({}, self.defaultDataTemplate);
+
+                            function callWorkflow(id) {
+                                return new Promise(resolve => {
+                                    let res = SiebelAppFacade.VTB24ProcessHelper.startService(
+                                        'Workflow Process Manager',
+                                        'RunProcess',
+                                        {
+                                            'ProcessName': 'VTB Auth Customer Info Process',
+                                            'Object Id': id
+                                        }
+                                    )
+                                    resolve (res)
+                                });
+                            }
+
+                            async function awaitWorkflow(id) {
+                                return await callWorkflow(id);
+                            }
+
+                            awaitWorkflow(CallInfo.customerId).then(Output => {
+                                if (Output['Error Code'] == '') {
+                                    self.operationsData.clientName = Output['First Name'] + ' ' + Output['Last Name'];
+                                    self.operationsData.notificationNumberFlg = CallInfo.notificationNumberFlg;
+                                    self.applicationName = SiebelApp.S_App.GetAppName();
+                                }
+                                else console.log(Output['Error Code'] + ': ' + Output['Error Text'])
+                            })
+
+                        })
+
+                        self.stompClient.send('/v1/auth/get/' + self.sid + '/' + self.operatorSessionId)
+                    })
+                })
+                //-------------------------------------
             }
             else {
-                alert(Outp['Error Code'] + ': ' + Outp['Error Message']);
+                console.log('%c' + Outp['Error Code'] + ': ' + Outp['Error Message'], 'color: #a00');
             }
         })
     }

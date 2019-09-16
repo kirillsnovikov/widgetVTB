@@ -3,9 +3,13 @@
         <div class="widget-header__main">
             <div class="widget-header__main__title">{{ClientName}}</div>
             <div class="widget-header__main__status">
-                <div class="widget-header__main__status__number success">
+                <div v-if="notificationNumberFlg" class="widget-header__main__status__number success">
                     <i class="icon-check"></i>
                     <span>Клиент звонит с доверенного номера</span>
+                </div>
+                <div v-if="!notificationNumberFlg" class="widget-header__main__status__number success">
+                    <i class="icon-remove"></i>
+                    <span>Клиент звонит с недоверенного номера</span>
                 </div>
                 <div
                     v-if="this.processStatus"
@@ -36,7 +40,8 @@ export default {
             type: String,
             default: "Неизвестный абонент"
         },
-        processStatus: Object
+        processStatus: Object,
+        notificationNumberFlg: Boolean
     },
     data() {
         return {

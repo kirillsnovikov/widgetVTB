@@ -26,7 +26,6 @@
     computed: {
       getBtnClass() {
         let bclass;
-        console.log(this.operation.OperationStatus);
         switch (this.operation.OperationStatus) {
           case 'success': bclass = 'check-btn-green'; break;
           case 'failed': bclass = 'check-btn-red'; break;

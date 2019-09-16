@@ -1,11 +1,12 @@
 <template>
     <div class="btn"
+        v-if="isAvalible"
         :class="getClass"
         @click="setOperationIndex(operation.Index)">
-    <span>{{operation.OperationName}}</span>
-    <i class="icon-forward"></i>
-    <!-- <i class="icon-forward" v-if="operation.ParentOperationIndex === null"></i>
-    <i class="icon-arrow_right" v-if="operation.ParentOperationIndex !== null"></i> -->
+        <span>{{operation.OperationName}}</span>
+        <i class="icon-forward"></i>
+        <!-- <i class="icon-forward" v-if="operation.ParentOperationIndex === null"></i>
+        <i class="icon-arrow_right" v-if="operation.ParentOperationIndex !== null"></i> -->
   </div>
 </template>
 
@@ -13,7 +14,8 @@
     export default {
         name: 'OperationButton',
         props: {
-            operation: Object
+            operation: Object,
+            appName: String
         },
         computed: {
             getClass() {
@@ -30,6 +32,16 @@
         methods: {
             setOperationIndex(index) {
                 this.$emit('set-operation-index', index)
+            },
+            isAvalible () {
+                let ACC = false;
+
+                if (this.appName == 'Outsource Call Center') {
+                    if (this.operation.AvailableInACC) ACC = true;
+                }
+                else ACC = true;
+
+                return  ACC;
             }
         }
     }

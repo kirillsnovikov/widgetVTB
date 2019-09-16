@@ -15,8 +15,9 @@
             <OperationButton
                 v-for="operation in operations"
                 :key="operation.OperationName"
-                @set-operation-index="setOperationIndex"
-                :operation="operation"></OperationButton>
+                :operation="operation"
+                :appName="appName"
+                @set-operation-index="setOperationIndex"></OperationButton>
             <Switcher
                 v-if="operations.length == 0 && parameters.length != 0"
                 :switchers="parameters"
@@ -85,7 +86,8 @@
             currentOperation: Object,
             parameters: Array,
             parentOperationIndex: Number,
-            fraudStatus: String
+            fraudStatus: String,
+            appName: String
         },
         computed: {
             getClass() {
