@@ -1,8 +1,12 @@
 <template>
     <section class="check">
         <div class="check__yesno-btn">
-            <div :class="getYesClass" @click="applyOperationReportFraud('success')">Yes</div>
-            <div :class="getNoClass" @click="applyOperationReportFraud('failed')">No</div>
+            <div
+                :class="getYesClass"
+                @click="applyOperationReportFraud('success')">Да</div>
+            <div
+                :class="getNoClass"
+                @click="applyOperationReportFraud('failed')">Нет</div>
         </div>
     </section>
 </template>

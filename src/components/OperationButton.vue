@@ -34,14 +34,22 @@
                 this.$emit('set-operation-index', index)
             },
             isAvalible () {
-                let ACC = false;
+                let ACCfilter = (
+                    this.appName == 'Siebel Universal Agent'
+                    ||
+                    (
+                        this.appName == 'Outsource Call Center'
+                        &&
+                        this.operation.AvailableInACC
+                    )
+                )
 
-                if (this.appName == 'Outsource Call Center') {
-                    if (this.operation.AvailableInACC) ACC = true;
-                }
-                else ACC = true;
+                // if (this.appName == 'Outsource Call Center') {
+                //     if (this.operation.AvailableInACC) ACC = true;
+                // }
+                // else ACC = true;
 
-                return  ACC;
+                return  ACCfilter;
             }
         }
     }

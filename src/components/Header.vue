@@ -1,7 +1,7 @@
 <template>
-    <div @mousedown="mouseDownHeader(e)" class="header-layout">
+    <div id="auth_widget_Header" @mousedown="mouseDownHeader" class="header-layout">
         <div class="widget-header__main">
-            <div class="widget-header__main__title">{{ClientName}}</div>
+            <div class="widget-header__main__title">{{clientName}}</div>
             <div class="widget-header__main__status">
                 <div v-if="notificationNumberFlg" class="widget-header__main__status__number success">
                     <i class="icon-check"></i>
@@ -21,6 +21,7 @@
             </div>
         </div>
         <div
+            id="auth_widget_HeaderButton"
             class="widget-header__button"
             @click="collapseExpandWidget"
             @mouseenter="mouseEnterButton"
@@ -36,10 +37,7 @@ export default {
     name: "Header",
     props: {
         expanded: Boolean,
-        ClientName: {
-            type: String,
-            default: "Неизвестный абонент"
-        },
+        clientName: String,
         processStatus: Object,
         notificationNumberFlg: Boolean
     },
@@ -55,18 +53,21 @@ export default {
     },
     methods: {
         collapseExpandWidget() {
-            this.$emit("collapse-expand-widget");
+            this.$emit('collapse-expand-widget');
             //this.isRotate = !this.isRotate;
         },
-        mouseDownHeader(e) {
-            this.$emit("mouse-down-header", e);
+        mouseDownHeader() {
+            this.$emit('mouse-down-header');
         },
         mouseEnterButton() {
-            this.$emit("mouse-enter-button");
+            this.$emit('mouse-enter-button');
         },
         mouseLeaveButton() {
-            this.$emit("mouse-leave-button");
+            this.$emit('mouse-leave-button');
         }
+    },
+    mounted() {
+        this.$emit('add-header-eventlisteners');
     }
 };
 </script>

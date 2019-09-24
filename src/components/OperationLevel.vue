@@ -22,7 +22,7 @@
                 v-if="operations.length == 0 && parameters.length != 0"
                 :switchers="parameters"
                 :operation="currentOperation"
-                :key="'switcher'"
+                key="switcher"
                 @apply-parameters="applyParameters"/>
             <section
                 v-if="operations.length == 0 && parameters.length == 0"
@@ -34,6 +34,7 @@
                     :class="getTextareaClass"
                     :placeholder="currentOperation.HintText"
                     :readonly="getReadonly"
+                    @input="currentOperation.isWarningDisplaying = false"
                     ></textarea>
                 <component
                     :is="currentOperation.CheckType"
@@ -42,7 +43,8 @@
                     :commentText="commentText"
                     @apply-operation="applyOperation"
                     @start-sms-countdown="startSmsCountdown"
-                    @check-code="checkCode"></component>
+                    @check-code="checkCode"
+                    @show-warning="showWarning"></component>
             </section>
         </transition-group>
         <transition name="operation-button" mode="out-in">
@@ -155,6 +157,9 @@
             },
             sendFraudMail(requestText, suspicionText, blockedText) {
                 this.$emit('send-fraud-mail', requestText, suspicionText, blockedText)
+            },
+            showWarning() {
+                this.currentOperation.isWarningDisplaying = true;
             }
         }
     }

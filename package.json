@@ -9,6 +9,7 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "http-parser-js": "^0.5.1",
+    "jquery": "^3.4.1",
     "sockjs-client": "^1.3.0",
     "stompjs": "^2.3.3",
     "vue": "^2.6.10"

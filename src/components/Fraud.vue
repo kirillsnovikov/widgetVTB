@@ -75,7 +75,7 @@
                 return this.fraudStatus == 'confirmed' || this.fraudStatus == 'sending'
             },
             getBtnClass() {
-                return 'fraud_button ' + (this.fraudStatus == 'sending' ? 'fraud_button_inactive' : 'fraud_button_active')
+                return 'fraud_button ' + (this.fraudStatus == 'sending' || this.requestText == '' || this.suspicionText == '' || this.blockedText == '' ? 'fraud_button_inactive' : 'fraud_button_active')
             }
         },
         methods: {
@@ -89,7 +89,7 @@
                 this.$emit('set-fraud-status', newStatus);
             },
             sendFraudMail() {
-                if (this.fraudStatus == 'confirmed')
+                if (this.fraudStatus == 'confirmed' && this.requestText != '' && this.suspicionText != '' && this.blockedText != '')
                     this.$emit('send-fraud-mail', this.requestText, this.suspicionText, this.blockedText)
             }
         }

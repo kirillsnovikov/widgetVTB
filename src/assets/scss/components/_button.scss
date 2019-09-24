@@ -16,7 +16,7 @@
   //border: 1px solid $white-two;
   transition: box-shadow $transition;
   padding: 0 5px;
-  height: 40px;
+  min-height: 40px;
   font-size: 14px;
   i {
     color: $vtb-blue;
@@ -41,6 +41,10 @@
       box-shadow: 0 0 10px rgba($no-button-color, 0.5);
     }
   }
+}
+
+.btn-main-operation > span {
+  width: 215px;
 }
 
 .btn-back {

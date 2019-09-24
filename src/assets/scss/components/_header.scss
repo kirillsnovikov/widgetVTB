@@ -8,6 +8,7 @@
   }
   &__main {
     width: 235px;
+    cursor: move;
     /*height: 50px;
     overflow: hidden;*/
     @extend %flex-column;
@@ -16,9 +17,11 @@
       font-weight: bold;
       font-size: 14px;
       margin-bottom: 3px;
+      user-select: none;
     }
     &__status {
       font-size: 12px;
+      user-select: none;
       &__number {
         // height: 15px;
         // overflow: hidden;

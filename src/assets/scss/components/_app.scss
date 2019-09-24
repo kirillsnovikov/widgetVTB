@@ -1,16 +1,15 @@
 .widget-container {
   @extend %flex-column;
   position: fixed;
-  top: 10px;
-  right: 10px;
   font-family: 'Roboto', sans-serif;
   background: $white;
   width: $widget-width;
   overflow: hidden;
   padding: 10px;
   box-sizing: border-box;
-  box-shadow: 0px 0px 15px rgba($black, 0.3);
+  box-shadow: 0px 0px 15px $vtb-blue;
   border-radius: 4px;
+  z-index: 2;
   & * {
     box-sizing: border-box;
   }
