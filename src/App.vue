@@ -209,7 +209,7 @@ export default {
                         'RunProcess',
                         {
                             'ProcessName': 'VTB24 Client Authentification Send Check Code',
-                            'actionId': ths.operationsData.actionId,
+                            'actionID': ths.operationsData.actionId,
                             'type': 'sendCode'
                         }
                     ))
@@ -241,33 +241,33 @@ export default {
 
             //для локальной разработки закомментируй от сюда
 
-            // function callWorkflow(ths) {
-            //     return new Promise(resolve => {
-            //         resolve (SiebelAppFacade.VTB24ProcessHelper.startService(
-            //             'Workflow Process Manager',
-            //             'RunProcess',
-            //             {
-            //                 'ProcessName': 'VTB24 Client Authentification Send Check Code',
-            //                 'actionID': ths.operationsData.actionId,
-            //                 'type': 'checkCode',
-            //                 'code': code
-            //             }
-            //         ))
-            //     });
-            // }
+            function callWorkflow(ths) {
+                return new Promise(resolve => {
+                    resolve (SiebelAppFacade.VTB24ProcessHelper.startService(
+                        'Workflow Process Manager',
+                        'RunProcess',
+                        {
+                            'ProcessName': 'VTB24 Client Authentification Send Check Code',
+                            'actionID': ths.operationsData.actionId,
+                            'type': 'checkCode',
+                            'code': code
+                        }
+                    ))
+                });
+            }
 
-            // async function awaitWorkflow(ths) {
-            //     return await callWorkflow(ths);
-            // }
+            async function awaitWorkflow(ths) {
+                return await callWorkflow(ths);
+            }
 
-            // awaitWorkflow(this).then(result => {
-            //     this.operationsData.Operations[index].CodeCheckInProgress = false;
-            //     if (result['Error Code'] == '00') {
-            //         this.operationsData.Operations[index].OperationStatus = 'success';
+            awaitWorkflow(this).then(result => {
+                this.operationsData.Operations[index].CodeCheckInProgress = false;
+                if (result['Error Code'] == '00') {
+                    this.operationsData.Operations[index].OperationStatus = 'success';
 
-            //         this.setNewProcessStatus(this, index)
-            //     }
-            // })
+                    this.setNewProcessStatus(this, index)
+                }
+            })
             //до сюда
         },
         setFraudStatus(newStatus){
