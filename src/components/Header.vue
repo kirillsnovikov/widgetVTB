@@ -74,7 +74,7 @@ export default {
 
         let fromCookies = document.cookie.split('; ').map(c => c.split('=')).find(c => c[0] == 'auth_widget_position');
 
-        if (fromCookies == undefined) {
+        if (typeof fromCookies == 'undefined') {
             $('#authWidget_Block').css({
                 top: '10px',
                 right: '310px'

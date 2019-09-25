@@ -67,7 +67,9 @@ export default {
             X_Offset: null,
             Y_Offset: null,
             mouseOverButton: false,
-            mouseIsHolding: false
+            mouseIsHolding: false,
+            userLogin: null,
+            userName: null
         };
     },
     watch: {
@@ -192,7 +194,52 @@ export default {
             this.operationsData.Operations[index].OperationStatus = newstatus;
 
             if (newstatus == 'success')
-                this.setNewProcessStatus(this, index)
+                this.setNewProcessStatus(this, index);
+
+            if (['success', 'failed'].includes(newstatus)) {
+                let date = new Date();
+                let month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+                let day = date.getUTCDate().toString().padStart(2, '0');
+                let year = date.getUTCFullYear();
+                let hours = date.getUTCHours().toString().padStart(2, '0');
+                let minutes = date.getUTCMinutes().toString().padStart(2, '0');
+                let seconds = date.getUTCSeconds().toString().padStart(2, '0');
+
+                let parameters = [];
+                for (let p of this.operationsData.Operations[index].ParametersIndexes) {
+                    parameters.push({
+                        'Name': p.ParameterName,
+                        'Result': p.ParameterStatus
+                    })
+                }
+
+                let Input = {
+                    ProcessName: 'VTB24 Authentication Operation History',
+                    SM: {
+                        IntObjectFormat: "Siebel Hierarchical",
+                        IntObjectName: "VTB24 Authentication Operation History",
+                        MessageType: "Integration Object",
+                        'ListOfVTB24 Authentication Operation History': {
+                            'VTB24 Authentication Operation History': [
+                                {
+                                    'Authentication Operation': this.operationsData.Operations[index].OperationName,
+                                    'Comment': text,
+                                    'Contact Id': this.operationsData.customerId,
+                                    'Emploee Login': this.userLogin,
+                                    'Emploee Name': this.userName,
+                                    'Operation Date': month + '/' + day + '/' + year + ' ' + hours + ':' + minutes + ':' + seconds,
+                                    'Operation Group': this.operationsData.Operations[this.operationsData.SelectedOperationIndex],
+                                    'ListOfVTB24 Authentication Operation History - Parameters': {
+                                        'VTB24 Authentication Operation History - Parameters': parameters
+                                    },
+                                }
+                            ]
+                        }
+                    }
+                };
+
+                SiebelAppFacade.VTB24ProcessHelper.startService('Workflow Process Manager', 'RunProcess', Input);
+            }
         },
         startSmsCountdown(index) {
             function stopCountdown(ths) {
@@ -276,7 +323,7 @@ export default {
                     let month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
                     let day = date.getUTCDate().toString().padStart(2, '0');
                     let year = date.getUTCFullYear();
-                    let hour = date.getUTCHours().toString().padStart(2, '0');
+                    let hours = date.getUTCHours().toString().padStart(2, '0');
                     let minutes = date.getUTCMinutes().toString().padStart(2, '0');
                     let seconds = date.getUTCSeconds().toString().padStart(2, '0');
                 return new Promise(resolve => {
@@ -362,6 +409,8 @@ export default {
         }
     },
     mounted() {
+        this.userLogin = SiebelApp.S_App.GetUserName();
+        this.userName = SiebelApp.S_App.GetProfileAttr('Full Name');
 
         document.body.addEventListener('mouseup', () => {
             if (this.mouseIsHolding) {
@@ -651,7 +700,6 @@ export default {
                         self.stompClient.subscribe('/topic/auth/close/' + self.sid + '/' + self.operatorSessionId, function(closeOutput){
                             console.log('Call session close', closeOutput);
                             self.operationsData = null;
-                            self.sid = null;
                         })
 
                         //подписываюсь на получение Snapshot
