@@ -14,9 +14,9 @@
         <transition-group v-if="fraudIsOkOrSuspicion" name="operation-button" mode="out-in">
             <OperationButton
                 v-for="operation in operations"
+                :isAvalible="isOperationAvalible(operation)"
                 :key="operation.OperationName"
                 :operation="operation"
-                :appName="appName"
                 @set-operation-index="setOperationIndex"></OperationButton>
             <Switcher
                 v-if="operations.length == 0 && parameters.length != 0"
@@ -89,7 +89,8 @@
             parameters: Array,
             parentOperationIndex: Number,
             fraudStatus: String,
-            appName: String
+            appName: String,
+            prohibitedDate: String
         },
         computed: {
             getClass() {
@@ -160,6 +161,29 @@
             },
             showWarning() {
                 this.currentOperation.isWarningDisplaying = true;
+            },
+            isOperationAvalible (operation) {
+                let ACCFilter = (
+                    this.appName == 'Siebel Universal Agent'
+                    ||
+                    (
+                        this.appName == 'Outsource Call Center'
+                        &&
+                        operation.AvailableInACC
+                    )
+                )
+
+                let ProhibitedFilter = (
+                    this.prohibitedDate == null
+                    ||
+                    (
+                        this.prohibitedDate != null
+                        &&
+                        operation.AvailableOnServiceProhibited
+                    )
+                )
+
+                return  ACCFilter && ProhibitedFilter;
             }
         }
     }

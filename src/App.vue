@@ -21,6 +21,7 @@
                 :parentOperationIndex="getParentOperationIndex"
                 :fraudStatus="operationsData.FraudStatus"
                 :appName="operationsData.applicationName"
+                :prohibitedDate="operationsData.prohibitedDate"
                 @set-operation-index="setOperationIndex"
                 @apply-parameters="applyParameters"
                 @apply-operation="applyOperation"
@@ -39,7 +40,7 @@
 
 <script>
 //import outputData from "./data/output_formated";
-//import outputData from './data/output.json';
+import outputData from './data/output.json';
 import Header from "./components/Header.vue";
 import OperationLevel from "./components/OperationLevel.vue";
 import { Promise } from "q";
@@ -200,19 +201,19 @@ export default {
                 ths.operationsData.Operations[index].Seconds = 15;
             }
 
-            //для локальной разработки закомментируй отсюда
-
             function callWorkflow(ths) {
                 return new Promise(resolve => {
-                    resolve (SiebelAppFacade.VTB24ProcessHelper.startService(
-                        'Workflow Process Manager',
-                        'RunProcess',
-                        {
-                            'ProcessName': 'VTB24 Client Authentification Send Check Code',
-                            'actionID': ths.operationsData.actionId,
-                            'type': 'sendCode'
-                        }
-                    ))
+                    resolve (//{ErrorCode: '00', a: 'a'})
+                        SiebelAppFacade.VTB24ProcessHelper.startService(
+                            'Workflow Process Manager',
+                            'RunProcess',
+                            {
+                                'ProcessName': 'VTB24 Client Authentification Send Check Code',
+                                'actionID': ths.sid,
+                                'type': 'sendCode'
+                            }
+                        )
+                    )
                 });
             }
 
@@ -230,16 +231,13 @@ export default {
             }, 1000);
 
             awaitWorkflow(this).then(result => {
-                if (result['Error Code'] == '00') {
+                if (result['errorCode'] == '00') {
                     this.operationsData.Operations[index].CodeSent = true;
                 }
             });
-            //вот до сюда
         },
         checkCode(index, code) {
             this.operationsData.Operations[index].CodeCheckInProgress = true;
-
-            //для локальной разработки закомментируй от сюда
 
             function callWorkflow(ths) {
                 return new Promise(resolve => {
@@ -248,7 +246,7 @@ export default {
                         'RunProcess',
                         {
                             'ProcessName': 'VTB24 Client Authentification Send Check Code',
-                            'actionID': ths.operationsData.actionId,
+                            'actionID': ths.sid,
                             'type': 'checkCode',
                             'code': code
                         }
@@ -262,48 +260,75 @@ export default {
 
             awaitWorkflow(this).then(result => {
                 this.operationsData.Operations[index].CodeCheckInProgress = false;
-                if (result['Error Code'] == '00') {
+                if (result['errorCode'] == '00') {
                     this.operationsData.Operations[index].OperationStatus = 'success';
 
                     this.setNewProcessStatus(this, index)
                 }
             })
-            //до сюда
         },
         setFraudStatus(newStatus){
             this.operationsData.FraudStatus = newStatus;
+
+            if (newStatus == 'confirmed') {
+                function callWorkflow(ths) {
+                    let date = new Date();
+                    let month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+                    let day = date.getUTCDate().toString().padStart(2, '0');
+                    let year = date.getUTCFullYear();
+                    let hour = date.getUTCHours().toString().padStart(2, '0');
+                    let minutes = date.getUTCMinutes().toString().padStart(2, '0');
+                    let seconds = date.getUTCSeconds().toString().padStart(2, '0');
+                return new Promise(resolve => {
+                    resolve (SiebelAppFacade.VTB24ProcessHelper.startService(
+                        'Workflow Process Manager',
+                        'RunProcess',
+                        {
+                            'ProcessName': 'VTB Auth Customer Save Process',
+                            'Object Id': ths.sid,
+                            'Prohibited': 'Y',
+                            'Prohibited Date': month + '/' + day + '/' + year + ' ' + hours + ':' + minutes + ':' + seconds
+                        }
+                    ))
+                });
+            }
+
+            async function awaitWorkflow(ths) {
+                return await callWorkflow(ths);
+            }
+
+            awaitWorkflow(this).then
+            }
         },
         sendFraudMail(requestText, suspicionText, blockedText) {
             this.operationsData.FraudStatus = 'sending';
 
-            //для локальной разработки закомментируй отсюда
+            function callWorkflow(ths) {
+                return new Promise(resolve => {
+                    resolve (SiebelAppFacade.VTB24ProcessHelper.startService(
+                        'Workflow Process Manager',
+                        'RunProcess',
+                        {
+                            'ProcessName': 'VTB24 Send Fraud Suspicion Email to Security',
+                            'ActionId': ths.customerId, // ид действия звонка, но если нужно можем взять и из GetProfileAttr("VTB24 Current Action Id") 
+                            'BanProduct': blockedText, // блокировался ли продукт
+                            'ReasonSuspicion': suspicionText,  // что вызвало подозрения
+                            'TreatmentEssence': requestText // суть обращения
+                        }
+                    ))
+                });
+            }
 
-            // function callWorkflow() {
-            //     return new Promise(resolve => {
-            //         resolve (SiebelAppFacade.VTB24ProcessHelper.startService(
-            //             'Workflow Process Manager',
-            //             'RunProcess',
-            //             {
-            //                 'ProcessName': 'VTB24 Send Fraud Suspicion Email to Security',
-            //                 'ActionId': auth_widget_ActionId, // ид действия звонка, но если нужно можем взять и из GetProfileAttr("VTB24 Current Action Id") 
-            //                 'BanProduct': blockedText, // блокировался ли продукт
-            //                 'ReasonSuspicion': suspicionText,  // что вызвало подозрения
-            //                 'TreatmentEssence': requestText // суть обращения
-            //             }
-            //         ))
-            //     });
-            // }
+            async function awaitWorkflow(ths) {
+                return await callWorkflow(ths);
+            }
 
-            // async function awaitWorkflow() {
-            //     return await callWorkflow();
-            // }
-
-            // awaitWorkflow().then(result => {
-            //     if (result['Error Code'] == '00') {
-            //         this.operationsData.FraudStatus = 'ok';
-            //     }
-            // });
-            //до сюда
+            awaitWorkflow(this).then(result => {
+                if (result['Error Code'] == '00') {
+                    this.operationsData.FraudStatus = 'ok';
+                    this.expanded = false;
+                }
+            });
         },
         setNewProcessStatus(ths, id) {
             if (ths.operationsData.Operations[id].ProcessStatusPriority != null) {
@@ -400,6 +425,7 @@ export default {
 
         let OpsParsStates = {
             clientName: '',
+            customerId: null,
             SelectedOperationIndex: null,
             ShowingStatusPriority: null,
                 // ok
@@ -427,36 +453,36 @@ export default {
 
         //для локальной разработки закомментируй отсюда
 
-        // function callWorkflow() {
-        //     return new Promise(resolve => {
-        //         let res = SiebelAppFacade.VTB24ProcessHelper.startService(
-        //             'Workflow Process Manager',
-        //             'RunProcess',
-        //             {
-        //                 'ProcessName': 'VTB24 Get Auth Administration',
-        //                 'Object Id': ''
-        //             }
-        //         )
-        //         resolve (res)
-        //     });
-        // }
+        function callWorkflow() {
+            return new Promise(resolve => {
+                let res = SiebelAppFacade.VTB24ProcessHelper.startService(
+                    'Workflow Process Manager',
+                    'RunProcess',
+                    {
+                        'ProcessName': 'VTB24 Get Auth Administration',
+                        'Object Id': ''
+                    }
+                )
+                resolve (res)
+            });
+        }
 
-        // async function awaitWorkflow() {
-        //     return await callWorkflow();
-        // }
+        async function awaitWorkflow() {
+            return await callWorkflow();
+        }
 
         //до сюда
 
         let self = this;
 
         //потом отсюда
-        // awaitWorkflow().then(function (Outp) {
-        //     if (Outp['Error Code'] == '') {
-        //         //получаем массив операций
-        //         var OpsArr = Outp.SM["ListOfVTB24 Auth Administration"]["VTB24 Auth Administration - Operation Groups"];
+        awaitWorkflow().then(function (Outp) {
+            if (Outp['Error Code'] == '') {
+                //получаем массив операций
+                var OpsArr = Outp.SM["ListOfVTB24 Auth Administration"]["VTB24 Auth Administration - Operation Groups"];
         //до сюда
 
-        /*dev--------------------------------*/ let OpsArr = outputData;
+        // /*dev--------------------------------*/ let OpsArr = outputData;
 
                 //обрабатываем каждую операцию
                 for (let op of OpsArr) {
@@ -593,100 +619,106 @@ export default {
 
                 self.defaultDataTemplate = Object.assign({}, OpsParsStates);
 
-                /*dev--------------------------------*/self.operationsData = Object.assign({}, self.defaultDataTemplate);
-                /*dev--------------------------------*/self.operationsData.clientName = 'Иван Петрович'
-                /*dev--------------------------------*/self.operationsData.notificationNumberFlg = true;
-                /*dev--------------------------------*/self.applicationName = 'Siebel Universal Agent';
+                // /*dev--------------------------------*/self.operationsData = Object.assign({}, self.defaultDataTemplate);
+                // /*dev--------------------------------*/self.operationsData.clientName = 'Иван Петрович'
+                // /*dev--------------------------------*/self.operationsData.notificationNumberFlg = true;
+                // /*dev--------------------------------*/self.operationsData.applicationName = 'Siebel Universal Agent';
+                // /*dev--------------------------------*///self.operationsData.prohibitedDate = '123.123.123';
+                // /*dev--------------------------------*///self.operationsData.ShowingStatusPriority = 1
 
                 //и потом отсюда
 
-//                 //создаём сокет, стомп клиент и вытягиваем Id сессии
-//                 var socket = new sockjs(SiebelAppFacade.VTB24ProcessHelper.lookupValue('VTB_BIOMETRICS_CONFIG', 'BiometryWidgetBackendURL'));
-//                 self.stompClient = Stomp.over(socket);
-//                 self.operatorSessionId = SiebelApp.S_App.GetProfileAttr('VTB24SessionId');
+                //создаём сокет, стомп клиент и вытягиваем Id сессии
+                var socket = new sockjs(SiebelAppFacade.VTB24ProcessHelper.lookupValue('VTB_BIOMETRICS_CONFIG', 'BiometryWidgetBackendURL'));
+                self.stompClient = Stomp.over(socket);
+                self.operatorSessionId = SiebelApp.S_App.GetProfileAttr('VTB24SessionId');
 
-//                 //подключаемся
-//                 self.stompClient.connect({}, function(frame) {
-//                     console.log('Call session connected (Client Authentication): ' + frame);
+                //подключаемся
+                self.stompClient.connect({}, function(frame) {
+                    console.log('Call session connected (Client Authentication): ' + frame);
 
-//                     //подписываемся на ошибки аутентификации в рамках сессии в зибеле
-//                     self.stompClient.subscribe('/topic/auth/error/' + self.operatorSessionId, function(errorOutput) {
-//                         console.log('Call session error', errorOutput);
-//                     })
+                    //подписываемся на ошибки аутентификации в рамках сессии в зибеле
+                    self.stompClient.subscribe('/topic/auth/error/' + self.operatorSessionId, function(errorOutput) {
+                        console.log('Call session error', errorOutput);
+                    })
 
-//                     //подписываемся на получение actionId/sid
-//                     self.stompClient.subscribe('/topic/embp_biometrics/sid/' + self.operatorSessionId, function(sidOutput) {
-//                         self.sid = sidOutput.body;
-//                         console.log('ActionId (Client Authentication): ' + self.sid);
+                    //подписываемся на получение actionId/sid
+                    self.stompClient.subscribe('/topic/embp_biometrics/sid/' + self.operatorSessionId, function(sidOutput) {
+                        self.sid = sidOutput.body;
+                        console.log('ActionId (Client Authentication): ' + self.sid);
 
-//                         //подписываюсь на окончание зваонка
-//                         self.stompClient.subscribe('/topic/auth/close/' + self.sid + '/' + self.operatorSessionId, function(closeOutput){
-//                             console.log('Call session close', closeOutput);
-//                             self.operationsData = null;
-//                             self.sid = null;
-//                         })
+                        //подписываюсь на окончание зваонка
+                        self.stompClient.subscribe('/topic/auth/close/' + self.sid + '/' + self.operatorSessionId, function(closeOutput){
+                            console.log('Call session close', closeOutput);
+                            self.operationsData = null;
+                            self.sid = null;
+                        })
 
-//                         //подписываюсь на получение Snapshot
-//                         self.stompClient.subscribe('/topic/auth/' + self.sid + '/' + self.operatorSessionId, function(snapshotOutput) {
-//                             console.log('Snapshot', snapshotOutput);
+                        //подписываюсь на получение Snapshot
+                        self.stompClient.subscribe('/topic/auth/' + self.sid + '/' + self.operatorSessionId, function(snapshotOutput) {
+                            console.log('Snapshot', snapshotOutput);
 
-//                             if (snapshotOutput.body == 'NEW_SESSION') {
-//                                 //запрашиваю информацию о звонке
-//                                 self.stompClient.send('/v1/auth/sessionInfo/' + self.sid + '/' + self.operatorSessionId)
-//                             }
-//                             else
-//                                 self.operationsData = JSON.parse(snapshotOutput.body);
-//                         }, self.stompHeader_Snapshot)
+                            if (snapshotOutput.body == 'NEW_SESSION') {
+                                //запрашиваю информацию о звонке
+                                self.stompClient.send('/v1/auth/sessionInfo/' + self.sid + '/' + self.operatorSessionId)
+                            }
+                            else
+                                self.operationsData = JSON.parse(snapshotOutput.body);
+                        }, self.stompHeader_Snapshot)
 
-//                         //подписываюсь на получение информации о звонке
-//                         self.stompClient.subscribe('/topic/auth/sessionInfo/' + self.sid + '/' + self.operatorSessionId, function(infoOutput){
-//                             let CallInfo = JSON.parse(infoOutput.body);
+                        //подписываюсь на получение информации о звонке
+                        self.stompClient.subscribe('/topic/auth/sessionInfo/' + self.sid + '/' + self.operatorSessionId, function(infoOutput){
+                            let CallInfo = JSON.parse(infoOutput.body);
 
-//                             self.operationsData = Object.assign({}, self.defaultDataTemplate);
+                            self.operationsData = Object.assign({}, self.defaultDataTemplate);
 
-//                             function callWorkflow(id) {
-//                                 return new Promise(resolve => {
-//                                     let res = SiebelAppFacade.VTB24ProcessHelper.startService(
-//                                         'Workflow Process Manager',
-//                                         'RunProcess',
-//                                         {
-//                                             'ProcessName': 'VTB Auth Customer Info Process',
-//                                             'Object Id': id
-//                                         }
-//                                     )
-//                                     resolve (res)
-//                                 });
-//                             }
+                            function callWorkflow(id) {
+                                return new Promise(resolve => {
+                                    let res = SiebelAppFacade.VTB24ProcessHelper.startService(
+                                        'Workflow Process Manager',
+                                        'RunProcess',
+                                        {
+                                            'ProcessName': 'VTB Auth Customer Info Process',
+                                            'Object Id': id
+                                        }
+                                    )
+                                    resolve (res)
+                                });
+                            }
 
-//                             async function awaitWorkflow(id) {
-//                                 return await callWorkflow(id);
-//                             }
+                            async function awaitWorkflow(id) {
+                                return await callWorkflow(id);
+                            }
 
-//                             awaitWorkflow(CallInfo.customerId).then(Output => {
-//                                 if (Output['Error Code'] == '') {
-//                                     self.operationsData.clientName = Output['First Name'] + ' ' + Output['Last Name'];
+                            awaitWorkflow(CallInfo.customerId).then(Output => {
+                                if (Output['Error Code'] == '') {
+                                    self.operationsData.clientName = Output['First Name'] + ' ' + Output['Last Name'];
 
-//                                     if(Output['Prohibited'] != '')
-//                                         self.operationsData.prohibitedDate = Output['Prohibited Date'];
+                                    if(Output['Prohibited'] != '') {
+                                         self.operationsData.prohibitedDate = Output['Prohibited Date'].toString();
+                                         self.operationsData.ShowingStatusPriority = 1;
+                                    }
 
-//                                     self.operationsData.notificationNumberFlg = CallInfo.notificationNumberFlg;
-// \
-//                                     self.applicationName = SiebelApp.S_App.GetAppName();
-//                                 }
-//                                 else console.log(Output['Error Code'] + ': ' + Output['Error Text'])
-//                             })
+                                    self.operationsData.customerId = SiebelApp.S_App.GetProfileAttr('VTB24 Current Contact Id');
 
-//                         })
+                                    self.operationsData.notificationNumberFlg = CallInfo.notificationNumberFlg;
 
-//                         self.stompClient.send('/v1/auth/get/' + self.sid + '/' + self.operatorSessionId)
-//                     })
-//                 })
-//                 //-------------------------------------
-//             }
-//             else {
-//                 console.log('%c' + Outp['Error Code'] + ': ' + Outp['Error Message'], 'color: #a00');
-//             }
-//         })
+                                    self.operationsData.applicationName = SiebelApp.S_App.GetAppName();
+                                }
+                                else console.log(Output['Error Code'] + ': ' + Output['Error Text'])
+                            })
+
+                        })
+
+                        self.stompClient.send('/v1/auth/get/' + self.sid + '/' + self.operatorSessionId)
+                    })
+                })
+                //-------------------------------------
+            }
+            else {
+                console.log('%c' + Outp['Error Code'] + ': ' + Outp['Error Message'], 'color: #a00');
+            }
+        })
 
         //до сюда
     }

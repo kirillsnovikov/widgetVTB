@@ -62,12 +62,12 @@
         },
         "Comment Required Flg": "N",
         "Operation Name": "Блокировка продукта",
-        "Available w Service Prohibited": "N",
+        "Available w Service Prohibited": "Y",
         "Parent Operation": "",
         "Hint Text": "",
         "Check": "По кнопке ОК",
         "Display Text": "Операция 3",
-        "ACC": "N",
+        "ACC": "Y",
         "Parent Operation Id": ""
     },
     {

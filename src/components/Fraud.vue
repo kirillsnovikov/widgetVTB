@@ -12,9 +12,9 @@
             v-if="renderMailLayer"
             class="fraud_layer"
             :style="getMailLayerStyle">
-            <div class="fraud_cross">
+            <!-- <div class="fraud_cross">
                 <div @click="setFraudStatus('ok')"><i class="icon-remove"></i></div>
-            </div>
+            </div> -->
             <div
                 class="fraud_text">Уточните информацию о предположительном злоумышленнике. Информация будет направлена в службу безопасности</div>
             <div

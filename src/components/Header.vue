@@ -14,9 +14,10 @@
                 <div
                     v-if="this.processStatus"
                     :class="'widget-header__main__status__operation ' +  (getStatusIsDanger ? 'danger' : 'success')">
-                    <i v-if="getStatusIsDanger" class="icon-remove"></i>
-                    <i v-if="!getStatusIsDanger" class="icon-check"></i>
-                    <span>{{this.processStatus.Text}}</span>
+                    <i :class="getStatusIsDanger ? 'icon-remove' : 'icon-check'"></i>
+                    <span>{{
+                        this.processStatus.Text + (this.processStatus.Priority == 1 ? this.prohibitedDate : '')
+                        }}</span>
                 </div>
             </div>
         </div>
@@ -40,7 +41,8 @@ export default {
         expanded: Boolean,
         clientName: String,
         processStatus: Object,
-        notificationNumberFlg: Boolean
+        notificationNumberFlg: Boolean,
+        prohibitedDate: String
     },
     data() {
         return {
@@ -74,14 +76,13 @@ export default {
 
         if (fromCookies == undefined) {
             $('#authWidget_Block').css({
-                top: '35px',
+                top: '10px',
                 right: '310px'
             })
-            document.cookie = 'auth_widget_position=35,310,,'
+            document.cookie = 'auth_widget_position=10px,310px,,'
         }
         else {
             let position = fromCookies[1].split(',');
-            console.log(position)
             let w = document.getElementById('authWidget_Block')
             $('#authWidget_Block').css({
                 top: position[0],

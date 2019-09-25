@@ -5,8 +5,6 @@
         @click="setOperationIndex(operation.Index)">
         <span>{{operation.OperationName}}</span>
         <i class="icon-forward"></i>
-        <!-- <i class="icon-forward" v-if="operation.ParentOperationIndex === null"></i>
-        <i class="icon-arrow_right" v-if="operation.ParentOperationIndex !== null"></i> -->
   </div>
 </template>
 
@@ -15,7 +13,7 @@
         name: 'OperationButton',
         props: {
             operation: Object,
-            appName: String
+            isAvalible: Boolean
         },
         computed: {
             getClass() {
@@ -32,24 +30,6 @@
         methods: {
             setOperationIndex(index) {
                 this.$emit('set-operation-index', index)
-            },
-            isAvalible () {
-                let ACCfilter = (
-                    this.appName == 'Siebel Universal Agent'
-                    ||
-                    (
-                        this.appName == 'Outsource Call Center'
-                        &&
-                        this.operation.AvailableInACC
-                    )
-                )
-
-                // if (this.appName == 'Outsource Call Center') {
-                //     if (this.operation.AvailableInACC) ACC = true;
-                // }
-                // else ACC = true;
-
-                return  ACCfilter;
             }
         }
     }
