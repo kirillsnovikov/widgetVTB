@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import $ from 'jquery'
 export default {
     name: "Header",
     props: {
@@ -68,6 +69,27 @@ export default {
     },
     mounted() {
         this.$emit('add-header-eventlisteners');
+
+        let fromCookies = document.cookie.split('; ').map(c => c.split('=')).find(c => c[0] == 'auth_widget_position');
+
+        if (fromCookies == undefined) {
+            $('#authWidget_Block').css({
+                top: '35px',
+                right: '310px'
+            })
+            document.cookie = 'auth_widget_position=35,310,,'
+        }
+        else {
+            let position = fromCookies[1].split(',');
+            console.log(position)
+            let w = document.getElementById('authWidget_Block')
+            $('#authWidget_Block').css({
+                top: position[0],
+                right: position[1],
+                bottom: position[2],
+                left: position[3]
+            })
+        }
     }
 };
 </script>
