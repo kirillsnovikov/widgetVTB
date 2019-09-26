@@ -61,7 +61,11 @@ export default {
             operatorSessionId: null,
             sid: null,
             stompClient: null,
-            stompHeader_Snapshot: null,
+            stompHeader: {
+                Snapshot: null,
+                Close: null,
+                Info: null
+            },
             operationsData: null,
             expanded: false,
             X_Offset: null,
@@ -332,7 +336,7 @@ export default {
                         'RunProcess',
                         {
                             'ProcessName': 'VTB Auth Customer Save Process',
-                            'Object Id': ths.sid,
+                            'Object Id': ths.customerId,
                             'Prohibited': 'Y',
                             'Prohibited Date': month + '/' + day + '/' + year + ' ' + hours + ':' + minutes + ':' + seconds
                         }
@@ -700,7 +704,11 @@ export default {
                         self.stompClient.subscribe('/topic/auth/close/' + self.sid + '/' + self.operatorSessionId, function(closeOutput){
                             console.log('Call session close', closeOutput);
                             self.operationsData = null;
-                        })
+
+                            for (let h in self.stompHeader){
+                                if (self.stompHeader[h]) self.stompClient.unsubscribe(self.stompHeader[h].id)
+                            }
+                        }, self.stompHeader.Close)
 
                         //подписываюсь на получение Snapshot
                         self.stompClient.subscribe('/topic/auth/' + self.sid + '/' + self.operatorSessionId, function(snapshotOutput) {
@@ -712,7 +720,7 @@ export default {
                             }
                             else
                                 self.operationsData = JSON.parse(snapshotOutput.body);
-                        }, self.stompHeader_Snapshot)
+                        }, self.stompHeader.Snapshot)
 
                         //подписываюсь на получение информации о звонке
                         self.stompClient.subscribe('/topic/auth/sessionInfo/' + self.sid + '/' + self.operatorSessionId, function(infoOutput){
@@ -756,7 +764,7 @@ export default {
                                 else console.log(Output['Error Code'] + ': ' + Output['Error Text'])
                             })
 
-                        })
+                        }, self.stompHeader.Info)
 
                         self.stompClient.send('/v1/auth/get/' + self.sid + '/' + self.operatorSessionId)
                     })
